@@ -63,6 +63,7 @@ uint8_t screen_2[17] = "****************";
 uint8_t screen_3[17] = "////////////////";
 uint8_t screen_4[17] = "================";
 uint8_t currentScreen = 0;
+uint8_t stateMachine = 0;
 
 /* USER CODE END PV */
 
@@ -161,75 +162,111 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  /* ============================================================================= */
+
+	  /********************************* TOP SLOT START ********************************/
+
 	  if(lcdControllerIsInitialized(&lcd) == FALSE)
 	  {
 		  lcdControllerInit(&lcd);
 		  continue;
 	  }
 
-	  pushButtonState = pushButtonReadSingleAndContinuousPress(&upPushButton);
-	  if(pushButtonState == PRESSED)
-	  {
-		  currentScreen += 1;
-		  if(currentScreen > 4)
-		  {
-			  currentScreen = 4;
-		  }
-	  }
+	  /********************************** TOP SLOT END *********************************/
 
-	  pushButtonState = pushButtonReadSingleAndContinuousPress(&downPushButton);
-	  if(pushButtonState == PRESSED)
-	  {
-		  currentScreen -= 1;
-		  if(currentScreen < 0)
-		  {
-			  currentScreen = 0;
-		  }
-	  }
+	  /* ============================================================================= */
 
-	  switch (currentScreen)
+	  /****************************** STATE MACHINE START ******************************/
+
+	  switch (stateMachine)
 	  {
 		  case 0:
-			  lcdControllerSetString(&lcd, ROW_0, screen_0);
-			  lcdControllerSetString(&lcd, ROW_1, screen_0);
-			  lcdControllerSetString(&lcd, ROW_2, screen_0);
-			  lcdControllerSetString(&lcd, ROW_3, screen_0);
+			  pushButtonState = pushButtonReadSingleAndContinuousPress(&upPushButton);
+			  if(pushButtonState == PRESSED)
+			  {
+				  currentScreen += 1;
+				  if(currentScreen > 4)
+				  {
+					  currentScreen = 4;
+				  }
+			  }
+			  stateMachine = 1;
 			  break;
 
 		  case 1:
-			  lcdControllerSetString(&lcd, ROW_0, screen_1);
-			  lcdControllerSetString(&lcd, ROW_1, screen_1);
-			  lcdControllerSetString(&lcd, ROW_2, screen_1);
-			  lcdControllerSetString(&lcd, ROW_3, screen_1);
+			  pushButtonState = pushButtonReadSingleAndContinuousPress(&downPushButton);
+			  if(pushButtonState == PRESSED)
+			  {
+				  currentScreen -= 1;
+				  if(currentScreen < 0)
+				  {
+					  currentScreen = 0;
+				  }
+			  }
+			  stateMachine = 2;
 			  break;
 
 		  case 2:
-			  lcdControllerSetString(&lcd, ROW_0, screen_2);
-			  lcdControllerSetString(&lcd, ROW_1, screen_2);
-			  lcdControllerSetString(&lcd, ROW_2, screen_2);
-			  lcdControllerSetString(&lcd, ROW_3, screen_2);
-			  break;
+			  switch (currentScreen)
+			  {
+				  case 0:
+					  lcdControllerSetString(&lcd, ROW_0, screen_0);
+					  lcdControllerSetString(&lcd, ROW_1, screen_0);
+					  lcdControllerSetString(&lcd, ROW_2, screen_0);
+					  lcdControllerSetString(&lcd, ROW_3, screen_0);
+					  break;
 
-		  case 3:
-			  lcdControllerSetString(&lcd, ROW_0, screen_3);
-			  lcdControllerSetString(&lcd, ROW_1, screen_3);
-			  lcdControllerSetString(&lcd, ROW_2, screen_3);
-			  lcdControllerSetString(&lcd, ROW_3, screen_3);
-			  break;
+				  case 1:
+					  lcdControllerSetString(&lcd, ROW_0, screen_1);
+					  lcdControllerSetString(&lcd, ROW_1, screen_1);
+					  lcdControllerSetString(&lcd, ROW_2, screen_1);
+					  lcdControllerSetString(&lcd, ROW_3, screen_1);
+					  break;
 
-		  case 4:
-			  lcdControllerSetString(&lcd, ROW_0, screen_4);
-			  lcdControllerSetString(&lcd, ROW_1, screen_4);
-			  lcdControllerSetString(&lcd, ROW_2, screen_4);
-			  lcdControllerSetString(&lcd, ROW_3, screen_4);
+				  case 2:
+					  lcdControllerSetString(&lcd, ROW_0, screen_2);
+					  lcdControllerSetString(&lcd, ROW_1, screen_2);
+					  lcdControllerSetString(&lcd, ROW_2, screen_2);
+					  lcdControllerSetString(&lcd, ROW_3, screen_2);
+					  break;
+
+				  case 3:
+					  lcdControllerSetString(&lcd, ROW_0, screen_3);
+					  lcdControllerSetString(&lcd, ROW_1, screen_3);
+					  lcdControllerSetString(&lcd, ROW_2, screen_3);
+					  lcdControllerSetString(&lcd, ROW_3, screen_3);
+					  break;
+
+				  case 4:
+					  lcdControllerSetString(&lcd, ROW_0, screen_4);
+					  lcdControllerSetString(&lcd, ROW_1, screen_4);
+					  lcdControllerSetString(&lcd, ROW_2, screen_4);
+					  lcdControllerSetString(&lcd, ROW_3, screen_4);
+					  break;
+
+				  default:
+					  currentScreen = 0;
+					  break;
+			  }
+			  stateMachine = 0;
 			  break;
 
 		  default:
-			  currentScreen = 0;
+			  stateMachine = 0;
 			  break;
 	  }
 
+	  /******************************* STATE MACHINE END *******************************/
+
+	  /* ============================================================================= */
+
+	  /******************************* BOTTOM SLOT START *******************************/
+
 	  lcdControllerUpdate(&lcd);
+
+	  /******************************** BOTTOM SLOT END ********************************/
+
+	  /* ============================================================================= */
 
   }
   /* USER CODE END 3 */

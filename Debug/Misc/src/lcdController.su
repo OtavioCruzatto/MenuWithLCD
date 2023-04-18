@@ -1,0 +1,14 @@
+../Misc/src/lcdController.c:10:13:lcdSendByte	16	static
+../Misc/src/lcdController.c:121:6:lcdControllerInitStruct	24	static
+../Misc/src/lcdController.c:180:6:lcdControllerInit	16	static
+../Misc/src/lcdController.c:423:6:lcdControllerUpdate	32	static
+../Misc/src/lcdController.c:512:6:lcdControllerSetString	32	static
+../Misc/src/lcdController.c:542:6:lcdControllerSetBacklight	16	static
+../Misc/src/lcdController.c:547:6:lcdControllerOnOff	16	static
+../Misc/src/lcdController.c:552:6:lcdControllerClearRow	16	static
+../Misc/src/lcdController.c:557:6:lcdControllerClearDisplay	16	static
+../Misc/src/lcdController.c:565:6:lcdControllerGetDelayStatus	16	static
+../Misc/src/lcdController.c:570:6:lcdControllerIncrementDelayCounter	16	static
+../Misc/src/lcdController.c:575:6:lcdControllerGetEnableDelayStatus	16	static
+../Misc/src/lcdController.c:580:6:lcdControllerIncrementEnableDelayCounter	16	static
+../Misc/src/lcdController.c:585:6:lcdControllerIsInitialized	16	static

@@ -32,7 +32,7 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
 			}
 			else if(lcdController->entry == 1)
 			{
-				if(lcdController->delayCounterEnable >= DELAY_100_MICRO_SECONDS)
+				if(lcdController->delayCounterEnable >= DELAY_150_MICRO_SECONDS)
 				{
 					lcdController->countEnableDelay = FALSE;
 					lcdController->delayCounterEnable = 0;
@@ -43,7 +43,7 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
 			}
 			else if(lcdController->entry == 2)
 			{
-				if(lcdController->delayCounterEnable >= DELAY_100_MICRO_SECONDS)
+				if(lcdController->delayCounterEnable >= DELAY_150_MICRO_SECONDS)
 				{
 					lcdController->countEnableDelay = FALSE;
 					lcdController->delayCounterEnable = 0;
@@ -54,7 +54,7 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
 			}
 			else
 			{
-				if(lcdController->delayCounterEnable >= DELAY_100_MICRO_SECONDS)
+				if(lcdController->delayCounterEnable >= DELAY_150_MICRO_SECONDS)
 				{
 					lcdController->countEnableDelay = FALSE;
 					lcdController->delayCounterEnable = 0;
@@ -80,7 +80,7 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
 			}
 			else if(lcdController->entry == 1)
 			{
-				if(lcdController->delayCounterEnable >= DELAY_100_MICRO_SECONDS)
+				if(lcdController->delayCounterEnable >= DELAY_150_MICRO_SECONDS)
 				{
 					lcdController->countEnableDelay = FALSE;
 					lcdController->delayCounterEnable = 0;
@@ -91,7 +91,7 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
 			}
 			else if(lcdController->entry == 2)
 			{
-				if(lcdController->delayCounterEnable >= DELAY_100_MICRO_SECONDS)
+				if(lcdController->delayCounterEnable >= DELAY_150_MICRO_SECONDS)
 				{
 					lcdController->countEnableDelay = FALSE;
 					lcdController->delayCounterEnable = 0;
@@ -102,7 +102,7 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
 			}
 			else
 			{
-				if(lcdController->delayCounterEnable >= DELAY_100_MICRO_SECONDS)
+				if(lcdController->delayCounterEnable >= DELAY_150_MICRO_SECONDS)
 				{
 					lcdController->countEnableDelay = FALSE;
 					lcdController->delayCounterEnable = 0;
@@ -253,7 +253,7 @@ void lcdControllerInit(LcdController *lcdController)
 			if(lcdController->byteSended == TRUE)
 			{
 				lcdController->countDelay = TRUE;
-				if(lcdController->delayCounter >= DELAY_1000_MICRO_SECONDS)
+				if(lcdController->delayCounter >= DELAY_1500_MICRO_SECONDS)
 				{
 					lcdController->countDelay = FALSE;
 					lcdController->delayCounter = 0;
@@ -271,7 +271,7 @@ void lcdControllerInit(LcdController *lcdController)
 			if(lcdController->byteSended == TRUE)
 			{
 				lcdController->countDelay = TRUE;
-				if(lcdController->delayCounter >= DELAY_1000_MICRO_SECONDS)
+				if(lcdController->delayCounter >= DELAY_1500_MICRO_SECONDS)
 				{
 					lcdController->countDelay = FALSE;
 					lcdController->delayCounter = 0;
@@ -289,7 +289,7 @@ void lcdControllerInit(LcdController *lcdController)
 			if(lcdController->byteSended == TRUE)
 			{
 				lcdController->countDelay = TRUE;
-				if(lcdController->delayCounter >= DELAY_2500_MICRO_SECONDS)
+				if(lcdController->delayCounter >= DELAY_3000_MICRO_SECONDS)
 				{
 					lcdController->countDelay = FALSE;
 					lcdController->delayCounter = 0;
@@ -307,7 +307,7 @@ void lcdControllerInit(LcdController *lcdController)
 			if(lcdController->byteSended == TRUE)
 			{
 				lcdController->countDelay = TRUE;
-				if(lcdController->delayCounter >= DELAY_2500_MICRO_SECONDS)
+				if(lcdController->delayCounter >= DELAY_3000_MICRO_SECONDS)
 				{
 					lcdController->countDelay = FALSE;
 					lcdController->delayCounter = 0;
@@ -325,7 +325,7 @@ void lcdControllerInit(LcdController *lcdController)
 			if(lcdController->byteSended == TRUE)
 			{
 				lcdController->countDelay = TRUE;
-				if(lcdController->delayCounter >= DELAY_1000_MICRO_SECONDS)
+				if(lcdController->delayCounter >= DELAY_1500_MICRO_SECONDS)
 				{
 					lcdController->countDelay = FALSE;
 					lcdController->delayCounter = 0;
@@ -343,7 +343,7 @@ void lcdControllerInit(LcdController *lcdController)
 			if(lcdController->byteSended == TRUE)
 			{
 				lcdController->countDelay = TRUE;
-				if(lcdController->delayCounter >= DELAY_1000_MICRO_SECONDS)
+				if(lcdController->delayCounter >= DELAY_1500_MICRO_SECONDS)
 				{
 					lcdController->countDelay = FALSE;
 					lcdController->delayCounter = 0;
@@ -378,17 +378,23 @@ void lcdControllerInit(LcdController *lcdController)
 			break;
 
 		case COMMAND_11:
-			lcdController->counterInitCycles1++;
-			if(lcdController->counterInitCycles1 < 2*(QTY_OF_ROWS * QTY_OF_CHARS_PER_ROW))
+			lcdController->countDelay = TRUE;
+			if(lcdController->delayCounter >= 0)
 			{
-				lcdControllerUpdate(lcdController);
-			}
-			else
-			{
-				lcdController->command = COMMAND_12;
-				lcdController->currentRow = 0;
-				lcdController->currentColumm = 0;
-				lcdController->counterInitCycles1 = 0;
+				lcdController->countDelay = FALSE;
+				lcdController->delayCounter = 0;
+				lcdController->counterInitCycles1++;
+				if(lcdController->counterInitCycles1 < 5*(QTY_OF_ROWS * QTY_OF_CHARS_PER_ROW))
+				{
+					lcdControllerUpdate(lcdController);
+				}
+				else
+				{
+					lcdController->command = COMMAND_12;
+					lcdController->currentRow = 0;
+					lcdController->currentColumm = 0;
+					lcdController->counterInitCycles1 = 0;
+				}
 			}
 			break;
 
@@ -469,7 +475,7 @@ void lcdControllerUpdate(LcdController *lcdController)
 				if(lcdController->byteSended == TRUE)
 				{
 					lcdController->countDelay = TRUE;
-					if(lcdController->delayCounter >= DELAY_100_MICRO_SECONDS)
+					if(lcdController->delayCounter >= DELAY_150_MICRO_SECONDS)
 					{
 						lcdController->countDelay = FALSE;
 						lcdController->delayCounter = 0;
@@ -487,7 +493,7 @@ void lcdControllerUpdate(LcdController *lcdController)
 				if(lcdController->byteSended == TRUE)
 				{
 					lcdController->countDelay = TRUE;
-					if(lcdController->delayCounter >= DELAY_100_MICRO_SECONDS)
+					if(lcdController->delayCounter >= DELAY_150_MICRO_SECONDS)
 					{
 						lcdController->countDelay = FALSE;
 						lcdController->delayCounter = 0;

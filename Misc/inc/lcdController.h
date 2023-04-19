@@ -18,9 +18,12 @@
 #define DELAY_50_MICRO_SECONDS		5
 #define DELAY_60_MICRO_SECONDS		6
 #define DELAY_100_MICRO_SECONDS		10
+#define DELAY_150_MICRO_SECONDS		15
+#define DELAY_600_MICRO_SECONDS		60
 #define DELAY_1000_MICRO_SECONDS	100
 #define DELAY_1500_MICRO_SECONDS	150
 #define DELAY_2500_MICRO_SECONDS	250
+#define DELAY_3000_MICRO_SECONDS	300
 #define DELAY_2000000_MICRO_SECONDS	200000
 
 #define QTY_OF_ROWS					4
@@ -137,7 +140,7 @@ typedef struct
 	Bool initialized;
 	uint8_t counterAux;
 	uint8_t counterUnlock;
-	uint8_t counterInitCycles1;
+	uint16_t counterInitCycles1;
 	uint8_t counterInitCycles2;
 	LcdRegisterSelection byteToSend;
 	Bool updatePosition;

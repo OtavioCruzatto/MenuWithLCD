@@ -3549,7 +3549,7 @@ LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_macro   0x000000000002211f      0x1e2 ./Misc/src/pushButton.o
  .debug_macro   0x0000000000022301       0x10 ./Misc/src/pushButton.o
 
-.debug_line     0x0000000000000000     0xd344
+.debug_line     0x0000000000000000     0xd342
  .debug_line    0x0000000000000000      0xb43 ./Core/Src/main.o
  .debug_line    0x0000000000000b43      0x742 ./Core/Src/stm32f4xx_hal_msp.o
  .debug_line    0x0000000000001285      0x77a ./Core/Src/stm32f4xx_it.o
@@ -3563,8 +3563,8 @@ LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x000000000000580f     0x1397 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .debug_line    0x0000000000006ba6     0x367b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
  .debug_line    0x000000000000a221     0x1984 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_line    0x000000000000bba5      0xfa1 ./Misc/src/lcdController.o
- .debug_line    0x000000000000cb46      0x7fe ./Misc/src/pushButton.o
+ .debug_line    0x000000000000bba5      0xf9f ./Misc/src/lcdController.o
+ .debug_line    0x000000000000cb44      0x7fe ./Misc/src/pushButton.o
 
 .debug_str      0x0000000000000000    0xd0137
  .debug_str     0x0000000000000000    0xcd205 ./Core/Src/main.o

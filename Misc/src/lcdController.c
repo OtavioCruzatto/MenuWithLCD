@@ -379,22 +379,20 @@ void lcdControllerInit(LcdController *lcdController)
 
 		case COMMAND_11:
 			lcdController->countDelay = TRUE;
-			if(lcdController->delayCounter >= 0)
+			if(lcdController->delayCounter >= DELAY_3000_MICRO_SECONDS)
 			{
-				lcdController->countDelay = FALSE;
-				lcdController->delayCounter = 0;
 				lcdController->counterInitCycles1++;
-				if(lcdController->counterInitCycles1 < 5*(QTY_OF_ROWS * QTY_OF_CHARS_PER_ROW))
-				{
-					lcdControllerUpdate(lcdController);
-				}
-				else
+				if(lcdController->counterInitCycles1 > 2*(QTY_OF_ROWS * QTY_OF_CHARS_PER_ROW))
 				{
 					lcdController->command = COMMAND_12;
 					lcdController->currentRow = 0;
 					lcdController->currentColumm = 0;
 					lcdController->counterInitCycles1 = 0;
 				}
+			}
+			else
+			{
+				lcdControllerUpdate(lcdController);
 			}
 			break;
 

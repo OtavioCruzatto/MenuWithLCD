@@ -5,25 +5,25 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   000001c4  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00003f80  080001c4  080001c4  000101c4  2**2
+  1 .text         00003f90  080001c4  080001c4  000101c4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000038  08004144  08004144  00014144  2**2
+  2 .rodata       00000038  08004154  08004154  00014154  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  0800417c  0800417c  00020070  2**0
+  3 .ARM.extab    00000000  0800418c  0800418c  00020070  2**0
                   CONTENTS
-  4 .ARM          00000008  0800417c  0800417c  0001417c  2**2
+  4 .ARM          00000008  0800418c  0800418c  0001418c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08004184  08004184  00020070  2**0
+  5 .preinit_array 00000000  08004194  08004194  00020070  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08004184  08004184  00014184  2**2
+  6 .init_array   00000004  08004194  08004194  00014194  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08004188  08004188  00014188  2**2
+  7 .fini_array   00000004  08004198  08004198  00014198  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000070  20000000  0800418c  00020000  2**2
+  8 .data         00000070  20000000  0800419c  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000001f0  20000070  080041fc  00020070  2**2
+  9 .bss          000001f0  20000070  0800420c  00020070  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000260  080041fc  00020260  2**0
+ 10 ._user_heap_stack 00000600  20000260  0800420c  00020260  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00022311  00000000  00000000  0002f3f0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000d342  00000000  00000000  00051701  2**0
+ 17 .debug_line   0000d348  00000000  00000000  00051701  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000d0137  00000000  00000000  0005ea43  2**0
+ 18 .debug_str    000d0137  00000000  00000000  0005ea49  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  0012eb7a  2**0
+ 19 .comment      00000050  00000000  00000000  0012eb80  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00002d88  00000000  00000000  0012ebcc  2**2
+ 20 .debug_frame  00002d88  00000000  00000000  0012ebd0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -62,7 +62,7 @@ Disassembly of section .text:
  80001da:	bd10      	pop	{r4, pc}
  80001dc:	20000070 	.word	0x20000070
  80001e0:	00000000 	.word	0x00000000
- 80001e4:	0800412c 	.word	0x0800412c
+ 80001e4:	0800413c 	.word	0x0800413c
 
 080001e8 <frame_dummy>:
  80001e8:	b508      	push	{r3, lr}
@@ -74,7 +74,7 @@ Disassembly of section .text:
  80001f6:	bd08      	pop	{r3, pc}
  80001f8:	00000000 	.word	0x00000000
  80001fc:	20000074 	.word	0x20000074
- 8000200:	0800412c 	.word	0x0800412c
+ 8000200:	0800413c 	.word	0x0800413c
 
 08000204 <strlen>:
  8000204:	4603      	mov	r3, r0
@@ -378,26 +378,26 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		if(lcdControllerGetDelayStatus(&lcd) == TRUE)
  8000528:	480b      	ldr	r0, [pc, #44]	; (8000558 <HAL_TIM_PeriodElapsedCallback+0x40>)
- 800052a:	f003 fc75 	bl	8003e18 <lcdControllerGetDelayStatus>
+ 800052a:	f003 fc7d 	bl	8003e28 <lcdControllerGetDelayStatus>
  800052e:	4603      	mov	r3, r0
  8000530:	2b01      	cmp	r3, #1
  8000532:	d102      	bne.n	800053a <HAL_TIM_PeriodElapsedCallback+0x22>
 		{
 			lcdControllerIncrementDelayCounter(&lcd);
  8000534:	4808      	ldr	r0, [pc, #32]	; (8000558 <HAL_TIM_PeriodElapsedCallback+0x40>)
- 8000536:	f003 fc7c 	bl	8003e32 <lcdControllerIncrementDelayCounter>
+ 8000536:	f003 fc84 	bl	8003e42 <lcdControllerIncrementDelayCounter>
 		}
 
 		if(lcdControllerGetEnableDelayStatus(&lcd) == TRUE)
  800053a:	4807      	ldr	r0, [pc, #28]	; (8000558 <HAL_TIM_PeriodElapsedCallback+0x40>)
- 800053c:	f003 fc8a 	bl	8003e54 <lcdControllerGetEnableDelayStatus>
+ 800053c:	f003 fc92 	bl	8003e64 <lcdControllerGetEnableDelayStatus>
  8000540:	4603      	mov	r3, r0
  8000542:	2b01      	cmp	r3, #1
  8000544:	d102      	bne.n	800054c <HAL_TIM_PeriodElapsedCallback+0x34>
 		{
 			lcdControllerIncrementEnableDelayCounter(&lcd);
  8000546:	4804      	ldr	r0, [pc, #16]	; (8000558 <HAL_TIM_PeriodElapsedCallback+0x40>)
- 8000548:	f003 fc91 	bl	8003e6e <lcdControllerIncrementEnableDelayCounter>
+ 8000548:	f003 fc99 	bl	8003e7e <lcdControllerIncrementEnableDelayCounter>
 		}
 	}
 }
@@ -454,7 +454,7 @@ int main(void)
  8000584:	f44f 7280 	mov.w	r2, #256	; 0x100
  8000588:	4995      	ldr	r1, [pc, #596]	; (80007e0 <main+0x284>)
  800058a:	4896      	ldr	r0, [pc, #600]	; (80007e4 <main+0x288>)
- 800058c:	f003 fc8d 	bl	8003eaa <pushButtonInit>
+ 800058c:	f003 fc95 	bl	8003eba <pushButtonInit>
   pushButtonInit(&downPushButton, BTN_DOWN_GPIO_Port, BTN_DOWN_Pin, NORMALLY_LOW, 400, 3000);
  8000590:	f640 33b8 	movw	r3, #3000	; 0xbb8
  8000594:	9301      	str	r3, [sp, #4]
@@ -464,7 +464,7 @@ int main(void)
  800059e:	f44f 7200 	mov.w	r2, #512	; 0x200
  80005a2:	498f      	ldr	r1, [pc, #572]	; (80007e0 <main+0x284>)
  80005a4:	4890      	ldr	r0, [pc, #576]	; (80007e8 <main+0x28c>)
- 80005a6:	f003 fc80 	bl	8003eaa <pushButtonInit>
+ 80005a6:	f003 fc88 	bl	8003eba <pushButtonInit>
   pushButtonInit(&enterPushButton, BTN_ENTER_GPIO_Port, BTN_ENTER_Pin, NORMALLY_LOW, 3000, 15000);
  80005aa:	f643 2398 	movw	r3, #15000	; 0x3a98
  80005ae:	9301      	str	r3, [sp, #4]
@@ -474,7 +474,7 @@ int main(void)
  80005b8:	2240      	movs	r2, #64	; 0x40
  80005ba:	498c      	ldr	r1, [pc, #560]	; (80007ec <main+0x290>)
  80005bc:	488c      	ldr	r0, [pc, #560]	; (80007f0 <main+0x294>)
- 80005be:	f003 fc74 	bl	8003eaa <pushButtonInit>
+ 80005be:	f003 fc7c 	bl	8003eba <pushButtonInit>
   pushButtonInit(&escPushButton, BTN_ESC_GPIO_Port, BTN_ESC_Pin, NORMALLY_LOW, 3000, 15000);
  80005c2:	f643 2398 	movw	r3, #15000	; 0x3a98
  80005c6:	9301      	str	r3, [sp, #4]
@@ -484,7 +484,7 @@ int main(void)
  80005d0:	2280      	movs	r2, #128	; 0x80
  80005d2:	4986      	ldr	r1, [pc, #536]	; (80007ec <main+0x290>)
  80005d4:	4887      	ldr	r0, [pc, #540]	; (80007f4 <main+0x298>)
- 80005d6:	f003 fc68 	bl	8003eaa <pushButtonInit>
+ 80005d6:	f003 fc70 	bl	8003eba <pushButtonInit>
 
   lcdControllerInitStruct(&lcd,
  80005da:	2300      	movs	r3, #0
@@ -544,7 +544,7 @@ int main(void)
 
 	  if(lcdControllerIsInitialized(&lcd) == FALSE)
  800063c:	4870      	ldr	r0, [pc, #448]	; (8000800 <main+0x2a4>)
- 800063e:	f003 fc27 	bl	8003e90 <lcdControllerIsInitialized>
+ 800063e:	f003 fc2f 	bl	8003ea0 <lcdControllerIsInitialized>
  8000642:	4603      	mov	r3, r0
  8000644:	2b00      	cmp	r3, #0
  8000646:	d103      	bne.n	8000650 <main+0xf4>
@@ -575,7 +575,7 @@ int main(void)
 		  case 0:
 			  pushButtonState = pushButtonReadSingleAndContinuousPress(&upPushButton);
  8000668:	485e      	ldr	r0, [pc, #376]	; (80007e4 <main+0x288>)
- 800066a:	f003 fd03 	bl	8004074 <pushButtonReadSingleAndContinuousPress>
+ 800066a:	f003 fd0b 	bl	8004084 <pushButtonReadSingleAndContinuousPress>
  800066e:	4603      	mov	r3, r0
  8000670:	461a      	mov	r2, r3
  8000672:	4b66      	ldr	r3, [pc, #408]	; (800080c <main+0x2b0>)
@@ -615,7 +615,7 @@ int main(void)
 		  case 1:
 			  pushButtonState = pushButtonReadSingleAndContinuousPress(&downPushButton);
  80006a0:	4851      	ldr	r0, [pc, #324]	; (80007e8 <main+0x28c>)
- 80006a2:	f003 fce7 	bl	8004074 <pushButtonReadSingleAndContinuousPress>
+ 80006a2:	f003 fcef 	bl	8004084 <pushButtonReadSingleAndContinuousPress>
  80006a6:	4603      	mov	r3, r0
  80006a8:	461a      	mov	r2, r3
  80006aa:	4b58      	ldr	r3, [pc, #352]	; (800080c <main+0x2b0>)
@@ -664,22 +664,22 @@ int main(void)
  80006ec:	4a49      	ldr	r2, [pc, #292]	; (8000814 <main+0x2b8>)
  80006ee:	2180      	movs	r1, #128	; 0x80
  80006f0:	4843      	ldr	r0, [pc, #268]	; (8000800 <main+0x2a4>)
- 80006f2:	f003 faee 	bl	8003cd2 <lcdControllerSetString>
+ 80006f2:	f003 faf6 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_1, screen_0);
  80006f6:	4a47      	ldr	r2, [pc, #284]	; (8000814 <main+0x2b8>)
  80006f8:	21c0      	movs	r1, #192	; 0xc0
  80006fa:	4841      	ldr	r0, [pc, #260]	; (8000800 <main+0x2a4>)
- 80006fc:	f003 fae9 	bl	8003cd2 <lcdControllerSetString>
+ 80006fc:	f003 faf1 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_2, screen_0);
  8000700:	4a44      	ldr	r2, [pc, #272]	; (8000814 <main+0x2b8>)
  8000702:	2190      	movs	r1, #144	; 0x90
  8000704:	483e      	ldr	r0, [pc, #248]	; (8000800 <main+0x2a4>)
- 8000706:	f003 fae4 	bl	8003cd2 <lcdControllerSetString>
+ 8000706:	f003 faec 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_3, screen_0);
  800070a:	4a42      	ldr	r2, [pc, #264]	; (8000814 <main+0x2b8>)
  800070c:	21d0      	movs	r1, #208	; 0xd0
  800070e:	483c      	ldr	r0, [pc, #240]	; (8000800 <main+0x2a4>)
- 8000710:	f003 fadf 	bl	8003cd2 <lcdControllerSetString>
+ 8000710:	f003 fae7 	bl	8003ce2 <lcdControllerSetString>
 					  break;
  8000714:	e057      	b.n	80007c6 <main+0x26a>
 
@@ -688,22 +688,22 @@ int main(void)
  8000716:	4a40      	ldr	r2, [pc, #256]	; (8000818 <main+0x2bc>)
  8000718:	2180      	movs	r1, #128	; 0x80
  800071a:	4839      	ldr	r0, [pc, #228]	; (8000800 <main+0x2a4>)
- 800071c:	f003 fad9 	bl	8003cd2 <lcdControllerSetString>
+ 800071c:	f003 fae1 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_1, screen_1);
  8000720:	4a3d      	ldr	r2, [pc, #244]	; (8000818 <main+0x2bc>)
  8000722:	21c0      	movs	r1, #192	; 0xc0
  8000724:	4836      	ldr	r0, [pc, #216]	; (8000800 <main+0x2a4>)
- 8000726:	f003 fad4 	bl	8003cd2 <lcdControllerSetString>
+ 8000726:	f003 fadc 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_2, screen_1);
  800072a:	4a3b      	ldr	r2, [pc, #236]	; (8000818 <main+0x2bc>)
  800072c:	2190      	movs	r1, #144	; 0x90
  800072e:	4834      	ldr	r0, [pc, #208]	; (8000800 <main+0x2a4>)
- 8000730:	f003 facf 	bl	8003cd2 <lcdControllerSetString>
+ 8000730:	f003 fad7 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_3, screen_1);
  8000734:	4a38      	ldr	r2, [pc, #224]	; (8000818 <main+0x2bc>)
  8000736:	21d0      	movs	r1, #208	; 0xd0
  8000738:	4831      	ldr	r0, [pc, #196]	; (8000800 <main+0x2a4>)
- 800073a:	f003 faca 	bl	8003cd2 <lcdControllerSetString>
+ 800073a:	f003 fad2 	bl	8003ce2 <lcdControllerSetString>
 					  break;
  800073e:	e042      	b.n	80007c6 <main+0x26a>
 
@@ -712,22 +712,22 @@ int main(void)
  8000740:	4a36      	ldr	r2, [pc, #216]	; (800081c <main+0x2c0>)
  8000742:	2180      	movs	r1, #128	; 0x80
  8000744:	482e      	ldr	r0, [pc, #184]	; (8000800 <main+0x2a4>)
- 8000746:	f003 fac4 	bl	8003cd2 <lcdControllerSetString>
+ 8000746:	f003 facc 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_1, screen_2);
  800074a:	4a34      	ldr	r2, [pc, #208]	; (800081c <main+0x2c0>)
  800074c:	21c0      	movs	r1, #192	; 0xc0
  800074e:	482c      	ldr	r0, [pc, #176]	; (8000800 <main+0x2a4>)
- 8000750:	f003 fabf 	bl	8003cd2 <lcdControllerSetString>
+ 8000750:	f003 fac7 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_2, screen_2);
  8000754:	4a31      	ldr	r2, [pc, #196]	; (800081c <main+0x2c0>)
  8000756:	2190      	movs	r1, #144	; 0x90
  8000758:	4829      	ldr	r0, [pc, #164]	; (8000800 <main+0x2a4>)
- 800075a:	f003 faba 	bl	8003cd2 <lcdControllerSetString>
+ 800075a:	f003 fac2 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_3, screen_2);
  800075e:	4a2f      	ldr	r2, [pc, #188]	; (800081c <main+0x2c0>)
  8000760:	21d0      	movs	r1, #208	; 0xd0
  8000762:	4827      	ldr	r0, [pc, #156]	; (8000800 <main+0x2a4>)
- 8000764:	f003 fab5 	bl	8003cd2 <lcdControllerSetString>
+ 8000764:	f003 fabd 	bl	8003ce2 <lcdControllerSetString>
 					  break;
  8000768:	e02d      	b.n	80007c6 <main+0x26a>
 
@@ -736,22 +736,22 @@ int main(void)
  800076a:	4a2d      	ldr	r2, [pc, #180]	; (8000820 <main+0x2c4>)
  800076c:	2180      	movs	r1, #128	; 0x80
  800076e:	4824      	ldr	r0, [pc, #144]	; (8000800 <main+0x2a4>)
- 8000770:	f003 faaf 	bl	8003cd2 <lcdControllerSetString>
+ 8000770:	f003 fab7 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_1, screen_3);
  8000774:	4a2a      	ldr	r2, [pc, #168]	; (8000820 <main+0x2c4>)
  8000776:	21c0      	movs	r1, #192	; 0xc0
  8000778:	4821      	ldr	r0, [pc, #132]	; (8000800 <main+0x2a4>)
- 800077a:	f003 faaa 	bl	8003cd2 <lcdControllerSetString>
+ 800077a:	f003 fab2 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_2, screen_3);
  800077e:	4a28      	ldr	r2, [pc, #160]	; (8000820 <main+0x2c4>)
  8000780:	2190      	movs	r1, #144	; 0x90
  8000782:	481f      	ldr	r0, [pc, #124]	; (8000800 <main+0x2a4>)
- 8000784:	f003 faa5 	bl	8003cd2 <lcdControllerSetString>
+ 8000784:	f003 faad 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_3, screen_3);
  8000788:	4a25      	ldr	r2, [pc, #148]	; (8000820 <main+0x2c4>)
  800078a:	21d0      	movs	r1, #208	; 0xd0
  800078c:	481c      	ldr	r0, [pc, #112]	; (8000800 <main+0x2a4>)
- 800078e:	f003 faa0 	bl	8003cd2 <lcdControllerSetString>
+ 800078e:	f003 faa8 	bl	8003ce2 <lcdControllerSetString>
 					  break;
  8000792:	e018      	b.n	80007c6 <main+0x26a>
 
@@ -760,22 +760,22 @@ int main(void)
  8000794:	4a23      	ldr	r2, [pc, #140]	; (8000824 <main+0x2c8>)
  8000796:	2180      	movs	r1, #128	; 0x80
  8000798:	4819      	ldr	r0, [pc, #100]	; (8000800 <main+0x2a4>)
- 800079a:	f003 fa9a 	bl	8003cd2 <lcdControllerSetString>
+ 800079a:	f003 faa2 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_1, screen_4);
  800079e:	4a21      	ldr	r2, [pc, #132]	; (8000824 <main+0x2c8>)
  80007a0:	21c0      	movs	r1, #192	; 0xc0
  80007a2:	4817      	ldr	r0, [pc, #92]	; (8000800 <main+0x2a4>)
- 80007a4:	f003 fa95 	bl	8003cd2 <lcdControllerSetString>
+ 80007a4:	f003 fa9d 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_2, screen_4);
  80007a8:	4a1e      	ldr	r2, [pc, #120]	; (8000824 <main+0x2c8>)
  80007aa:	2190      	movs	r1, #144	; 0x90
  80007ac:	4814      	ldr	r0, [pc, #80]	; (8000800 <main+0x2a4>)
- 80007ae:	f003 fa90 	bl	8003cd2 <lcdControllerSetString>
+ 80007ae:	f003 fa98 	bl	8003ce2 <lcdControllerSetString>
 					  lcdControllerSetString(&lcd, ROW_3, screen_4);
  80007b2:	4a1c      	ldr	r2, [pc, #112]	; (8000824 <main+0x2c8>)
  80007b4:	21d0      	movs	r1, #208	; 0xd0
  80007b6:	4812      	ldr	r0, [pc, #72]	; (8000800 <main+0x2a4>)
- 80007b8:	f003 fa8b 	bl	8003cd2 <lcdControllerSetString>
+ 80007b8:	f003 fa93 	bl	8003ce2 <lcdControllerSetString>
 					  break;
  80007bc:	e003      	b.n	80007c6 <main+0x26a>
 
@@ -808,7 +808,7 @@ int main(void)
 
 	  lcdControllerUpdate(&lcd);
  80007d6:	480a      	ldr	r0, [pc, #40]	; (8000800 <main+0x2a4>)
- 80007d8:	f003 f978 	bl	8003acc <lcdControllerUpdate>
+ 80007d8:	f003 f980 	bl	8003adc <lcdControllerUpdate>
 	  if(lcdControllerIsInitialized(&lcd) == FALSE)
  80007dc:	e72e      	b.n	800063c <main+0xe0>
  80007de:	bf00      	nop
@@ -846,7 +846,7 @@ void SystemClock_Config(void)
  8000832:	2234      	movs	r2, #52	; 0x34
  8000834:	2100      	movs	r1, #0
  8000836:	4618      	mov	r0, r3
- 8000838:	f003 fc5c 	bl	80040f4 <memset>
+ 8000838:	f003 fc64 	bl	8004104 <memset>
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
  800083c:	f107 0308 	add.w	r3, r7, #8
  8000840:	2200      	movs	r2, #0
@@ -1918,7 +1918,7 @@ LoopFillZerobss:
  8000d6e:	f7ff ffd7 	bl	8000d20 <SystemInit>
 /* Call static constructors */
     bl __libc_init_array
- 8000d72:	f003 f99b 	bl	80040ac <__libc_init_array>
+ 8000d72:	f003 f9a3 	bl	80040bc <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
  8000d76:	f7ff fbf1 	bl	800055c <main>
@@ -1931,7 +1931,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8000d84:	20000070 	.word	0x20000070
   ldr r2, =_sidata
- 8000d88:	0800418c 	.word	0x0800418c
+ 8000d88:	0800419c 	.word	0x0800419c
   ldr r2, =_sbss
  8000d8c:	20000070 	.word	0x20000070
   ldr r4, =_ebss
@@ -3580,7 +3580,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  80016ca:	bf00      	nop
  80016cc:	40023c00 	.word	0x40023c00
  80016d0:	40023800 	.word	0x40023800
- 80016d4:	0800416c 	.word	0x0800416c
+ 80016d4:	0800417c 	.word	0x0800417c
  80016d8:	20000064 	.word	0x20000064
  80016dc:	20000068 	.word	0x20000068
 
@@ -8455,28 +8455,28 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
  800348c:	2210      	movs	r2, #16
  800348e:	2120      	movs	r1, #32
  8003490:	4618      	mov	r0, r3
- 8003492:	f000 fe2f 	bl	80040f4 <memset>
+ 8003492:	f000 fe37 	bl	8004104 <memset>
 	memset((char *) lcdController->stringMatrixBuffer[1], ' ', QTY_OF_CHARS_PER_ROW);
  8003496:	68fb      	ldr	r3, [r7, #12]
  8003498:	3311      	adds	r3, #17
  800349a:	2210      	movs	r2, #16
  800349c:	2120      	movs	r1, #32
  800349e:	4618      	mov	r0, r3
- 80034a0:	f000 fe28 	bl	80040f4 <memset>
+ 80034a0:	f000 fe30 	bl	8004104 <memset>
 	memset((char *) lcdController->stringMatrixBuffer[2], ' ', QTY_OF_CHARS_PER_ROW);
  80034a4:	68fb      	ldr	r3, [r7, #12]
  80034a6:	3322      	adds	r3, #34	; 0x22
  80034a8:	2210      	movs	r2, #16
  80034aa:	2120      	movs	r1, #32
  80034ac:	4618      	mov	r0, r3
- 80034ae:	f000 fe21 	bl	80040f4 <memset>
+ 80034ae:	f000 fe29 	bl	8004104 <memset>
 	memset((char *) lcdController->stringMatrixBuffer[3], ' ', QTY_OF_CHARS_PER_ROW);
  80034b2:	68fb      	ldr	r3, [r7, #12]
  80034b4:	3333      	adds	r3, #51	; 0x33
  80034b6:	2210      	movs	r2, #16
  80034b8:	2120      	movs	r1, #32
  80034ba:	4618      	mov	r0, r3
- 80034bc:	f000 fe1a 	bl	80040f4 <memset>
+ 80034bc:	f000 fe22 	bl	8004104 <memset>
 
 	memset((char *) lcdController->stringMatrixShow[0], ' ', QTY_OF_CHARS_PER_ROW);
  80034c0:	68fb      	ldr	r3, [r7, #12]
@@ -8484,28 +8484,28 @@ static void lcdSendByte(LcdController *lcdController, LcdRegisterSelection lcdRs
  80034c4:	2210      	movs	r2, #16
  80034c6:	2120      	movs	r1, #32
  80034c8:	4618      	mov	r0, r3
- 80034ca:	f000 fe13 	bl	80040f4 <memset>
+ 80034ca:	f000 fe1b 	bl	8004104 <memset>
 	memset((char *) lcdController->stringMatrixShow[1], ' ', QTY_OF_CHARS_PER_ROW);
  80034ce:	68fb      	ldr	r3, [r7, #12]
  80034d0:	3355      	adds	r3, #85	; 0x55
  80034d2:	2210      	movs	r2, #16
  80034d4:	2120      	movs	r1, #32
  80034d6:	4618      	mov	r0, r3
- 80034d8:	f000 fe0c 	bl	80040f4 <memset>
+ 80034d8:	f000 fe14 	bl	8004104 <memset>
 	memset((char *) lcdController->stringMatrixShow[2], ' ', QTY_OF_CHARS_PER_ROW);
  80034dc:	68fb      	ldr	r3, [r7, #12]
  80034de:	3366      	adds	r3, #102	; 0x66
  80034e0:	2210      	movs	r2, #16
  80034e2:	2120      	movs	r1, #32
  80034e4:	4618      	mov	r0, r3
- 80034e6:	f000 fe05 	bl	80040f4 <memset>
+ 80034e6:	f000 fe0d 	bl	8004104 <memset>
 	memset((char *) lcdController->stringMatrixShow[3], ' ', QTY_OF_CHARS_PER_ROW);
  80034ea:	68fb      	ldr	r3, [r7, #12]
  80034ec:	3377      	adds	r3, #119	; 0x77
  80034ee:	2210      	movs	r2, #16
  80034f0:	2120      	movs	r1, #32
  80034f2:	4618      	mov	r0, r3
- 80034f4:	f000 fdfe 	bl	80040f4 <memset>
+ 80034f4:	f000 fe06 	bl	8004104 <memset>
 }
  80034f8:	bf00      	nop
  80034fa:	3710      	adds	r7, #16
@@ -8523,12 +8523,12 @@ void lcdControllerInit(LcdController *lcdController)
 	lcdControllerSetBacklight(lcdController, BL_00_PERCENT);
  8003508:	2100      	movs	r1, #0
  800350a:	6878      	ldr	r0, [r7, #4]
- 800350c:	f000 fc3a 	bl	8003d84 <lcdControllerSetBacklight>
+ 800350c:	f000 fc42 	bl	8003d94 <lcdControllerSetBacklight>
 	switch(lcdController->command)
  8003510:	687b      	ldr	r3, [r7, #4]
  8003512:	f893 308e 	ldrb.w	r3, [r3, #142]	; 0x8e
  8003516:	2b0d      	cmp	r3, #13
- 8003518:	f200 82cd 	bhi.w	8003ab6 <lcdControllerInit+0x5b6>
+ 8003518:	f200 82d5 	bhi.w	8003ac6 <lcdControllerInit+0x5c6>
  800351c:	a201      	add	r2, pc, #4	; (adr r2, 8003524 <lcdControllerInit+0x24>)
  800351e:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  8003522:	bf00      	nop
@@ -8544,14 +8544,14 @@ void lcdControllerInit(LcdController *lcdController)
  8003548:	080038f3 	.word	0x080038f3
  800354c:	0800393f 	.word	0x0800393f
  8003550:	080039b5 	.word	0x080039b5
- 8003554:	08003a0d 	.word	0x08003a0d
- 8003558:	08003a43 	.word	0x08003a43
+ 8003554:	08003a1d 	.word	0x08003a1d
+ 8003558:	08003a53 	.word	0x08003a53
 	{
 		case COMMAND_0:
 			lcdControllerOnOff(lcdController, LCD_OFF);
  800355c:	2101      	movs	r1, #1
  800355e:	6878      	ldr	r0, [r7, #4]
- 8003560:	f000 fc46 	bl	8003df0 <lcdControllerOnOff>
+ 8003560:	f000 fc4e 	bl	8003e00 <lcdControllerOnOff>
 			lcdController->countDelay = TRUE;
  8003564:	687b      	ldr	r3, [r7, #4]
  8003566:	2201      	movs	r2, #1
@@ -8561,7 +8561,7 @@ void lcdControllerInit(LcdController *lcdController)
  800356e:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  8003572:	4ab8      	ldr	r2, [pc, #736]	; (8003854 <lcdControllerInit+0x354>)
  8003574:	4293      	cmp	r3, r2
- 8003576:	f240 8287 	bls.w	8003a88 <lcdControllerInit+0x588>
+ 8003576:	f240 828f 	bls.w	8003a98 <lcdControllerInit+0x598>
 			{
 				lcdController->countDelay = FALSE;
  800357a:	687b      	ldr	r3, [r7, #4]
@@ -8577,7 +8577,7 @@ void lcdControllerInit(LcdController *lcdController)
  800358e:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
 			}
 			break;
- 8003592:	e279      	b.n	8003a88 <lcdControllerInit+0x588>
+ 8003592:	e281      	b.n	8003a98 <lcdControllerInit+0x598>
 
 		case COMMAND_1:
 			HAL_GPIO_WritePin(lcdController->enPort, lcdController->enPin, GPIO_PIN_SET);
@@ -8645,7 +8645,7 @@ void lcdControllerInit(LcdController *lcdController)
  8003628:	687b      	ldr	r3, [r7, #4]
  800362a:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  800362e:	2b63      	cmp	r3, #99	; 0x63
- 8003630:	f240 822c 	bls.w	8003a8c <lcdControllerInit+0x58c>
+ 8003630:	f240 8234 	bls.w	8003a9c <lcdControllerInit+0x59c>
 			{
 				lcdController->countDelay = FALSE;
  8003634:	687b      	ldr	r3, [r7, #4]
@@ -8661,7 +8661,7 @@ void lcdControllerInit(LcdController *lcdController)
  8003648:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
 			}
 			break;
- 800364c:	e21e      	b.n	8003a8c <lcdControllerInit+0x58c>
+ 800364c:	e226      	b.n	8003a9c <lcdControllerInit+0x59c>
 
 		case COMMAND_2:
 			HAL_GPIO_WritePin(lcdController->enPort, lcdController->enPin, GPIO_PIN_RESET);
@@ -8729,7 +8729,7 @@ void lcdControllerInit(LcdController *lcdController)
  80036e2:	687b      	ldr	r3, [r7, #4]
  80036e4:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  80036e8:	2b63      	cmp	r3, #99	; 0x63
- 80036ea:	f240 81d1 	bls.w	8003a90 <lcdControllerInit+0x590>
+ 80036ea:	f240 81d9 	bls.w	8003aa0 <lcdControllerInit+0x5a0>
 			{
 				lcdController->countDelay = FALSE;
  80036ee:	687b      	ldr	r3, [r7, #4]
@@ -8762,7 +8762,7 @@ void lcdControllerInit(LcdController *lcdController)
 				}
 			}
 			break;
- 8003720:	e1b6      	b.n	8003a90 <lcdControllerInit+0x590>
+ 8003720:	e1be      	b.n	8003aa0 <lcdControllerInit+0x5a0>
 					lcdController->command = COMMAND_3;
  8003722:	687b      	ldr	r3, [r7, #4]
  8003724:	2203      	movs	r2, #3
@@ -8772,13 +8772,13 @@ void lcdControllerInit(LcdController *lcdController)
  800372c:	2200      	movs	r2, #0
  800372e:	f883 2091 	strb.w	r2, [r3, #145]	; 0x91
 			break;
- 8003732:	e1ad      	b.n	8003a90 <lcdControllerInit+0x590>
+ 8003732:	e1b5      	b.n	8003aa0 <lcdControllerInit+0x5a0>
 
 		case COMMAND_3:
 			lcdControllerOnOff(lcdController, LCD_ON);
  8003734:	2100      	movs	r1, #0
  8003736:	6878      	ldr	r0, [r7, #4]
- 8003738:	f000 fb5a 	bl	8003df0 <lcdControllerOnOff>
+ 8003738:	f000 fb62 	bl	8003e00 <lcdControllerOnOff>
 			lcdController->countDelay = TRUE;
  800373c:	687b      	ldr	r3, [r7, #4]
  800373e:	2201      	movs	r2, #1
@@ -8788,7 +8788,7 @@ void lcdControllerInit(LcdController *lcdController)
  8003746:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  800374a:	4a42      	ldr	r2, [pc, #264]	; (8003854 <lcdControllerInit+0x354>)
  800374c:	4293      	cmp	r3, r2
- 800374e:	f240 81a1 	bls.w	8003a94 <lcdControllerInit+0x594>
+ 800374e:	f240 81a9 	bls.w	8003aa4 <lcdControllerInit+0x5a4>
 			{
 				lcdController->countDelay = FALSE;
  8003752:	687b      	ldr	r3, [r7, #4]
@@ -8804,7 +8804,7 @@ void lcdControllerInit(LcdController *lcdController)
  8003766:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
 			}
 			break;
- 800376a:	e193      	b.n	8003a94 <lcdControllerInit+0x594>
+ 800376a:	e19b      	b.n	8003aa4 <lcdControllerInit+0x5a4>
 
 		case COMMAND_4:
 			if(lcdController->byteSended == TRUE)
@@ -8821,7 +8821,7 @@ void lcdControllerInit(LcdController *lcdController)
  800377e:	687b      	ldr	r3, [r7, #4]
  8003780:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  8003784:	2b95      	cmp	r3, #149	; 0x95
- 8003786:	f240 8187 	bls.w	8003a98 <lcdControllerInit+0x598>
+ 8003786:	f240 818f 	bls.w	8003aa8 <lcdControllerInit+0x5a8>
 				{
 					lcdController->countDelay = FALSE;
  800378a:	687b      	ldr	r3, [r7, #4]
@@ -8845,14 +8845,14 @@ void lcdControllerInit(LcdController *lcdController)
 				lcdSendByte(lcdController, COMMAND, FUNCTION_SET_4BIT_MULTILINE_5X8DOTS);
 			}
 			break;
- 80037aa:	e175      	b.n	8003a98 <lcdControllerInit+0x598>
+ 80037aa:	e17d      	b.n	8003aa8 <lcdControllerInit+0x5a8>
 				lcdSendByte(lcdController, COMMAND, FUNCTION_SET_4BIT_MULTILINE_5X8DOTS);
  80037ac:	2228      	movs	r2, #40	; 0x28
  80037ae:	2100      	movs	r1, #0
  80037b0:	6878      	ldr	r0, [r7, #4]
  80037b2:	f7ff fc0f 	bl	8002fd4 <lcdSendByte>
 			break;
- 80037b6:	e16f      	b.n	8003a98 <lcdControllerInit+0x598>
+ 80037b6:	e177      	b.n	8003aa8 <lcdControllerInit+0x5a8>
 
 		case COMMAND_5:
 			if(lcdController->byteSended == TRUE)
@@ -8869,7 +8869,7 @@ void lcdControllerInit(LcdController *lcdController)
  80037ca:	687b      	ldr	r3, [r7, #4]
  80037cc:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  80037d0:	2b95      	cmp	r3, #149	; 0x95
- 80037d2:	f240 8163 	bls.w	8003a9c <lcdControllerInit+0x59c>
+ 80037d2:	f240 816b 	bls.w	8003aac <lcdControllerInit+0x5ac>
 				{
 					lcdController->countDelay = FALSE;
  80037d6:	687b      	ldr	r3, [r7, #4]
@@ -8893,14 +8893,14 @@ void lcdControllerInit(LcdController *lcdController)
 				lcdSendByte(lcdController, COMMAND, CURSOR_OR_DISPLAY_SHIFT_SHIFTCURSORTOTHERIGHT);
 			}
 			break;
- 80037f6:	e151      	b.n	8003a9c <lcdControllerInit+0x59c>
+ 80037f6:	e159      	b.n	8003aac <lcdControllerInit+0x5ac>
 				lcdSendByte(lcdController, COMMAND, CURSOR_OR_DISPLAY_SHIFT_SHIFTCURSORTOTHERIGHT);
  80037f8:	2214      	movs	r2, #20
  80037fa:	2100      	movs	r1, #0
  80037fc:	6878      	ldr	r0, [r7, #4]
  80037fe:	f7ff fbe9 	bl	8002fd4 <lcdSendByte>
 			break;
- 8003802:	e14b      	b.n	8003a9c <lcdControllerInit+0x59c>
+ 8003802:	e153      	b.n	8003aac <lcdControllerInit+0x5ac>
 
 		case COMMAND_6:
 			if(lcdController->byteSended == TRUE)
@@ -8917,7 +8917,7 @@ void lcdControllerInit(LcdController *lcdController)
  8003816:	687b      	ldr	r3, [r7, #4]
  8003818:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  800381c:	f5b3 7f96 	cmp.w	r3, #300	; 0x12c
- 8003820:	f0c0 813e 	bcc.w	8003aa0 <lcdControllerInit+0x5a0>
+ 8003820:	f0c0 8146 	bcc.w	8003ab0 <lcdControllerInit+0x5b0>
 				{
 					lcdController->countDelay = FALSE;
  8003824:	687b      	ldr	r3, [r7, #4]
@@ -8941,14 +8941,14 @@ void lcdControllerInit(LcdController *lcdController)
 				lcdSendByte(lcdController, COMMAND, CLEAR_DISPLAY);
 			}
 			break;
- 8003844:	e12c      	b.n	8003aa0 <lcdControllerInit+0x5a0>
+ 8003844:	e134      	b.n	8003ab0 <lcdControllerInit+0x5b0>
 				lcdSendByte(lcdController, COMMAND, CLEAR_DISPLAY);
  8003846:	2201      	movs	r2, #1
  8003848:	2100      	movs	r1, #0
  800384a:	6878      	ldr	r0, [r7, #4]
  800384c:	f7ff fbc2 	bl	8002fd4 <lcdSendByte>
 			break;
- 8003850:	e126      	b.n	8003aa0 <lcdControllerInit+0x5a0>
+ 8003850:	e12e      	b.n	8003ab0 <lcdControllerInit+0x5b0>
  8003852:	bf00      	nop
  8003854:	00030d3f 	.word	0x00030d3f
 
@@ -8967,7 +8967,7 @@ void lcdControllerInit(LcdController *lcdController)
  800386a:	687b      	ldr	r3, [r7, #4]
  800386c:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  8003870:	f5b3 7f96 	cmp.w	r3, #300	; 0x12c
- 8003874:	f0c0 8116 	bcc.w	8003aa4 <lcdControllerInit+0x5a4>
+ 8003874:	f0c0 811e 	bcc.w	8003ab4 <lcdControllerInit+0x5b4>
 				{
 					lcdController->countDelay = FALSE;
  8003878:	687b      	ldr	r3, [r7, #4]
@@ -8991,14 +8991,14 @@ void lcdControllerInit(LcdController *lcdController)
 				lcdSendByte(lcdController, COMMAND, RETURN_HOME);
 			}
 			break;
- 8003898:	e104      	b.n	8003aa4 <lcdControllerInit+0x5a4>
+ 8003898:	e10c      	b.n	8003ab4 <lcdControllerInit+0x5b4>
 				lcdSendByte(lcdController, COMMAND, RETURN_HOME);
  800389a:	2202      	movs	r2, #2
  800389c:	2100      	movs	r1, #0
  800389e:	6878      	ldr	r0, [r7, #4]
  80038a0:	f7ff fb98 	bl	8002fd4 <lcdSendByte>
 			break;
- 80038a4:	e0fe      	b.n	8003aa4 <lcdControllerInit+0x5a4>
+ 80038a4:	e106      	b.n	8003ab4 <lcdControllerInit+0x5b4>
 
 		case COMMAND_8:
 			if(lcdController->byteSended == TRUE)
@@ -9015,7 +9015,7 @@ void lcdControllerInit(LcdController *lcdController)
  80038b8:	687b      	ldr	r3, [r7, #4]
  80038ba:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  80038be:	2b95      	cmp	r3, #149	; 0x95
- 80038c0:	f240 80f2 	bls.w	8003aa8 <lcdControllerInit+0x5a8>
+ 80038c0:	f240 80fa 	bls.w	8003ab8 <lcdControllerInit+0x5b8>
 				{
 					lcdController->countDelay = FALSE;
  80038c4:	687b      	ldr	r3, [r7, #4]
@@ -9039,14 +9039,14 @@ void lcdControllerInit(LcdController *lcdController)
 				lcdSendByte(lcdController, COMMAND, ENTRY_MODE_SET_INCREMENT_NOTSHIFT);
 			}
 			break;
- 80038e4:	e0e0      	b.n	8003aa8 <lcdControllerInit+0x5a8>
+ 80038e4:	e0e8      	b.n	8003ab8 <lcdControllerInit+0x5b8>
 				lcdSendByte(lcdController, COMMAND, ENTRY_MODE_SET_INCREMENT_NOTSHIFT);
  80038e6:	2206      	movs	r2, #6
  80038e8:	2100      	movs	r1, #0
  80038ea:	6878      	ldr	r0, [r7, #4]
  80038ec:	f7ff fb72 	bl	8002fd4 <lcdSendByte>
 			break;
- 80038f0:	e0da      	b.n	8003aa8 <lcdControllerInit+0x5a8>
+ 80038f0:	e0e2      	b.n	8003ab8 <lcdControllerInit+0x5b8>
 
 		case COMMAND_9:
 			if(lcdController->byteSended == TRUE)
@@ -9063,7 +9063,7 @@ void lcdControllerInit(LcdController *lcdController)
  8003904:	687b      	ldr	r3, [r7, #4]
  8003906:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  800390a:	2b95      	cmp	r3, #149	; 0x95
- 800390c:	f240 80ce 	bls.w	8003aac <lcdControllerInit+0x5ac>
+ 800390c:	f240 80d6 	bls.w	8003abc <lcdControllerInit+0x5bc>
 				{
 					lcdController->countDelay = FALSE;
  8003910:	687b      	ldr	r3, [r7, #4]
@@ -9087,14 +9087,14 @@ void lcdControllerInit(LcdController *lcdController)
 				lcdSendByte(lcdController, COMMAND, DISPLAY_ON_OFF_CONTROL_DISPLAYON_CURSOROFF);
 			}
 			break;
- 8003930:	e0bc      	b.n	8003aac <lcdControllerInit+0x5ac>
+ 8003930:	e0c4      	b.n	8003abc <lcdControllerInit+0x5bc>
 				lcdSendByte(lcdController, COMMAND, DISPLAY_ON_OFF_CONTROL_DISPLAYON_CURSOROFF);
  8003932:	220c      	movs	r2, #12
  8003934:	2100      	movs	r1, #0
  8003936:	6878      	ldr	r0, [r7, #4]
  8003938:	f7ff fb4c 	bl	8002fd4 <lcdSendByte>
 			break;
- 800393c:	e0b6      	b.n	8003aac <lcdControllerInit+0x5ac>
+ 800393c:	e0be      	b.n	8003abc <lcdControllerInit+0x5bc>
 
 		case COMMAND_10:
 			if(lcdController->counterAux == 0)
@@ -9104,25 +9104,25 @@ void lcdControllerInit(LcdController *lcdController)
  8003946:	d118      	bne.n	800397a <lcdControllerInit+0x47a>
 			{
 				lcdControllerSetString(lcdController, ROW_0, (uint8_t *) "################");
- 8003948:	4a5d      	ldr	r2, [pc, #372]	; (8003ac0 <lcdControllerInit+0x5c0>)
+ 8003948:	4a61      	ldr	r2, [pc, #388]	; (8003ad0 <lcdControllerInit+0x5d0>)
  800394a:	2180      	movs	r1, #128	; 0x80
  800394c:	6878      	ldr	r0, [r7, #4]
- 800394e:	f000 f9c0 	bl	8003cd2 <lcdControllerSetString>
+ 800394e:	f000 f9c8 	bl	8003ce2 <lcdControllerSetString>
 				lcdControllerSetString(lcdController, ROW_1, (uint8_t *) "################");
- 8003952:	4a5b      	ldr	r2, [pc, #364]	; (8003ac0 <lcdControllerInit+0x5c0>)
+ 8003952:	4a5f      	ldr	r2, [pc, #380]	; (8003ad0 <lcdControllerInit+0x5d0>)
  8003954:	21c0      	movs	r1, #192	; 0xc0
  8003956:	6878      	ldr	r0, [r7, #4]
- 8003958:	f000 f9bb 	bl	8003cd2 <lcdControllerSetString>
+ 8003958:	f000 f9c3 	bl	8003ce2 <lcdControllerSetString>
 				lcdControllerSetString(lcdController, ROW_2, (uint8_t *) "################");
- 800395c:	4a58      	ldr	r2, [pc, #352]	; (8003ac0 <lcdControllerInit+0x5c0>)
+ 800395c:	4a5c      	ldr	r2, [pc, #368]	; (8003ad0 <lcdControllerInit+0x5d0>)
  800395e:	2190      	movs	r1, #144	; 0x90
  8003960:	6878      	ldr	r0, [r7, #4]
- 8003962:	f000 f9b6 	bl	8003cd2 <lcdControllerSetString>
+ 8003962:	f000 f9be 	bl	8003ce2 <lcdControllerSetString>
 				lcdControllerSetString(lcdController, ROW_3, (uint8_t *) "################");
- 8003966:	4a56      	ldr	r2, [pc, #344]	; (8003ac0 <lcdControllerInit+0x5c0>)
+ 8003966:	4a5a      	ldr	r2, [pc, #360]	; (8003ad0 <lcdControllerInit+0x5d0>)
  8003968:	21d0      	movs	r1, #208	; 0xd0
  800396a:	6878      	ldr	r0, [r7, #4]
- 800396c:	f000 f9b1 	bl	8003cd2 <lcdControllerSetString>
+ 800396c:	f000 f9b9 	bl	8003ce2 <lcdControllerSetString>
 				lcdController->counterAux = 1;
  8003970:	687b      	ldr	r3, [r7, #4]
  8003972:	2201      	movs	r2, #1
@@ -9132,25 +9132,25 @@ void lcdControllerInit(LcdController *lcdController)
 			else
 			{
 				lcdControllerSetString(lcdController, ROW_0, (uint8_t *) "                ");
- 800397a:	4a52      	ldr	r2, [pc, #328]	; (8003ac4 <lcdControllerInit+0x5c4>)
+ 800397a:	4a56      	ldr	r2, [pc, #344]	; (8003ad4 <lcdControllerInit+0x5d4>)
  800397c:	2180      	movs	r1, #128	; 0x80
  800397e:	6878      	ldr	r0, [r7, #4]
- 8003980:	f000 f9a7 	bl	8003cd2 <lcdControllerSetString>
+ 8003980:	f000 f9af 	bl	8003ce2 <lcdControllerSetString>
 				lcdControllerSetString(lcdController, ROW_1, (uint8_t *) "                ");
- 8003984:	4a4f      	ldr	r2, [pc, #316]	; (8003ac4 <lcdControllerInit+0x5c4>)
+ 8003984:	4a53      	ldr	r2, [pc, #332]	; (8003ad4 <lcdControllerInit+0x5d4>)
  8003986:	21c0      	movs	r1, #192	; 0xc0
  8003988:	6878      	ldr	r0, [r7, #4]
- 800398a:	f000 f9a2 	bl	8003cd2 <lcdControllerSetString>
+ 800398a:	f000 f9aa 	bl	8003ce2 <lcdControllerSetString>
 				lcdControllerSetString(lcdController, ROW_2, (uint8_t *) "                ");
- 800398e:	4a4d      	ldr	r2, [pc, #308]	; (8003ac4 <lcdControllerInit+0x5c4>)
+ 800398e:	4a51      	ldr	r2, [pc, #324]	; (8003ad4 <lcdControllerInit+0x5d4>)
  8003990:	2190      	movs	r1, #144	; 0x90
  8003992:	6878      	ldr	r0, [r7, #4]
- 8003994:	f000 f99d 	bl	8003cd2 <lcdControllerSetString>
+ 8003994:	f000 f9a5 	bl	8003ce2 <lcdControllerSetString>
 				lcdControllerSetString(lcdController, ROW_3, (uint8_t *) "                ");
- 8003998:	4a4a      	ldr	r2, [pc, #296]	; (8003ac4 <lcdControllerInit+0x5c4>)
+ 8003998:	4a4e      	ldr	r2, [pc, #312]	; (8003ad4 <lcdControllerInit+0x5d4>)
  800399a:	21d0      	movs	r1, #208	; 0xd0
  800399c:	6878      	ldr	r0, [r7, #4]
- 800399e:	f000 f998 	bl	8003cd2 <lcdControllerSetString>
+ 800399e:	f000 f9a0 	bl	8003ce2 <lcdControllerSetString>
 				lcdController->counterAux = 0;
  80039a2:	687b      	ldr	r3, [r7, #4]
  80039a4:	2200      	movs	r2, #0
@@ -9161,7 +9161,7 @@ void lcdControllerInit(LcdController *lcdController)
  80039ac:	220b      	movs	r2, #11
  80039ae:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
 			break;
- 80039b2:	e080      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 80039b2:	e088      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 
 		case COMMAND_11:
 			lcdController->countDelay = TRUE;
@@ -9172,1201 +9172,1209 @@ void lcdControllerInit(LcdController *lcdController)
  80039bc:	687b      	ldr	r3, [r7, #4]
  80039be:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
  80039c2:	f5b3 7f96 	cmp.w	r3, #300	; 0x12c
- 80039c6:	d31d      	bcc.n	8003a04 <lcdControllerInit+0x504>
+ 80039c6:	d325      	bcc.n	8003a14 <lcdControllerInit+0x514>
 			{
-				lcdController->counterInitCycles1++;
+				lcdController->countDelay = FALSE;
  80039c8:	687b      	ldr	r3, [r7, #4]
- 80039ca:	f8b3 3092 	ldrh.w	r3, [r3, #146]	; 0x92
- 80039ce:	3301      	adds	r3, #1
- 80039d0:	b29a      	uxth	r2, r3
- 80039d2:	687b      	ldr	r3, [r7, #4]
- 80039d4:	f8a3 2092 	strh.w	r2, [r3, #146]	; 0x92
-				if(lcdController->counterInitCycles1 > 2*(QTY_OF_ROWS * QTY_OF_CHARS_PER_ROW))
+ 80039ca:	2200      	movs	r2, #0
+ 80039cc:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+				lcdController->delayCounter = 0;
+ 80039d0:	687b      	ldr	r3, [r7, #4]
+ 80039d2:	2200      	movs	r2, #0
+ 80039d4:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
+				lcdController->counterInitCycles1++;
  80039d8:	687b      	ldr	r3, [r7, #4]
  80039da:	f8b3 3092 	ldrh.w	r3, [r3, #146]	; 0x92
- 80039de:	2b80      	cmp	r3, #128	; 0x80
- 80039e0:	d966      	bls.n	8003ab0 <lcdControllerInit+0x5b0>
+ 80039de:	3301      	adds	r3, #1
+ 80039e0:	b29a      	uxth	r2, r3
+ 80039e2:	687b      	ldr	r3, [r7, #4]
+ 80039e4:	f8a3 2092 	strh.w	r2, [r3, #146]	; 0x92
+				if(lcdController->counterInitCycles1 > 2)
+ 80039e8:	687b      	ldr	r3, [r7, #4]
+ 80039ea:	f8b3 3092 	ldrh.w	r3, [r3, #146]	; 0x92
+ 80039ee:	2b02      	cmp	r3, #2
+ 80039f0:	d966      	bls.n	8003ac0 <lcdControllerInit+0x5c0>
 				{
 					lcdController->command = COMMAND_12;
- 80039e2:	687b      	ldr	r3, [r7, #4]
- 80039e4:	220c      	movs	r2, #12
- 80039e6:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
-					lcdController->currentRow = 0;
- 80039ea:	687b      	ldr	r3, [r7, #4]
- 80039ec:	2200      	movs	r2, #0
- 80039ee:	f883 2097 	strb.w	r2, [r3, #151]	; 0x97
-					lcdController->currentColumm = 0;
  80039f2:	687b      	ldr	r3, [r7, #4]
- 80039f4:	2200      	movs	r2, #0
- 80039f6:	f883 2098 	strb.w	r2, [r3, #152]	; 0x98
-					lcdController->counterInitCycles1 = 0;
+ 80039f4:	220c      	movs	r2, #12
+ 80039f6:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
+					lcdController->currentRow = 0;
  80039fa:	687b      	ldr	r3, [r7, #4]
  80039fc:	2200      	movs	r2, #0
- 80039fe:	f8a3 2092 	strh.w	r2, [r3, #146]	; 0x92
+ 80039fe:	f883 2097 	strb.w	r2, [r3, #151]	; 0x97
+					lcdController->currentColumm = 0;
+ 8003a02:	687b      	ldr	r3, [r7, #4]
+ 8003a04:	2200      	movs	r2, #0
+ 8003a06:	f883 2098 	strb.w	r2, [r3, #152]	; 0x98
+					lcdController->counterInitCycles1 = 0;
+ 8003a0a:	687b      	ldr	r3, [r7, #4]
+ 8003a0c:	2200      	movs	r2, #0
+ 8003a0e:	f8a3 2092 	strh.w	r2, [r3, #146]	; 0x92
 			}
 			else
 			{
 				lcdControllerUpdate(lcdController);
 			}
 			break;
- 8003a02:	e055      	b.n	8003ab0 <lcdControllerInit+0x5b0>
+ 8003a12:	e055      	b.n	8003ac0 <lcdControllerInit+0x5c0>
 				lcdControllerUpdate(lcdController);
- 8003a04:	6878      	ldr	r0, [r7, #4]
- 8003a06:	f000 f861 	bl	8003acc <lcdControllerUpdate>
+ 8003a14:	6878      	ldr	r0, [r7, #4]
+ 8003a16:	f000 f861 	bl	8003adc <lcdControllerUpdate>
 			break;
- 8003a0a:	e051      	b.n	8003ab0 <lcdControllerInit+0x5b0>
+ 8003a1a:	e051      	b.n	8003ac0 <lcdControllerInit+0x5c0>
 
 		case COMMAND_12:
 			lcdController->counterInitCycles2++;
- 8003a0c:	687b      	ldr	r3, [r7, #4]
- 8003a0e:	f893 3094 	ldrb.w	r3, [r3, #148]	; 0x94
- 8003a12:	3301      	adds	r3, #1
- 8003a14:	b2da      	uxtb	r2, r3
- 8003a16:	687b      	ldr	r3, [r7, #4]
- 8003a18:	f883 2094 	strb.w	r2, [r3, #148]	; 0x94
-			if(lcdController->counterInitCycles2 > 1)
  8003a1c:	687b      	ldr	r3, [r7, #4]
  8003a1e:	f893 3094 	ldrb.w	r3, [r3, #148]	; 0x94
- 8003a22:	2b01      	cmp	r3, #1
- 8003a24:	d908      	bls.n	8003a38 <lcdControllerInit+0x538>
+ 8003a22:	3301      	adds	r3, #1
+ 8003a24:	b2da      	uxtb	r2, r3
+ 8003a26:	687b      	ldr	r3, [r7, #4]
+ 8003a28:	f883 2094 	strb.w	r2, [r3, #148]	; 0x94
+			if(lcdController->counterInitCycles2 > 1)
+ 8003a2c:	687b      	ldr	r3, [r7, #4]
+ 8003a2e:	f893 3094 	ldrb.w	r3, [r3, #148]	; 0x94
+ 8003a32:	2b01      	cmp	r3, #1
+ 8003a34:	d908      	bls.n	8003a48 <lcdControllerInit+0x548>
 			{
 				lcdController->command = COMMAND_13;
- 8003a26:	687b      	ldr	r3, [r7, #4]
- 8003a28:	220d      	movs	r2, #13
- 8003a2a:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
+ 8003a36:	687b      	ldr	r3, [r7, #4]
+ 8003a38:	220d      	movs	r2, #13
+ 8003a3a:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
 				lcdController->counterInitCycles2 = 0;
- 8003a2e:	687b      	ldr	r3, [r7, #4]
- 8003a30:	2200      	movs	r2, #0
- 8003a32:	f883 2094 	strb.w	r2, [r3, #148]	; 0x94
+ 8003a3e:	687b      	ldr	r3, [r7, #4]
+ 8003a40:	2200      	movs	r2, #0
+ 8003a42:	f883 2094 	strb.w	r2, [r3, #148]	; 0x94
 			}
 			else
 			{
 				lcdController->command = COMMAND_4;
 			}
 			break;
- 8003a36:	e03e      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003a46:	e03e      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 				lcdController->command = COMMAND_4;
- 8003a38:	687b      	ldr	r3, [r7, #4]
- 8003a3a:	2204      	movs	r2, #4
- 8003a3c:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
+ 8003a48:	687b      	ldr	r3, [r7, #4]
+ 8003a4a:	2204      	movs	r2, #4
+ 8003a4c:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
 			break;
- 8003a40:	e039      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003a50:	e039      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 
 		case COMMAND_13:
 			lcdController->countDelay = TRUE;
- 8003a42:	687b      	ldr	r3, [r7, #4]
- 8003a44:	2201      	movs	r2, #1
- 8003a46:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+ 8003a52:	687b      	ldr	r3, [r7, #4]
+ 8003a54:	2201      	movs	r2, #1
+ 8003a56:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
 			if(lcdController->delayCounter >= DELAY_2000000_MICRO_SECONDS)
- 8003a4a:	687b      	ldr	r3, [r7, #4]
- 8003a4c:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
- 8003a50:	4a1d      	ldr	r2, [pc, #116]	; (8003ac8 <lcdControllerInit+0x5c8>)
- 8003a52:	4293      	cmp	r3, r2
- 8003a54:	d92e      	bls.n	8003ab4 <lcdControllerInit+0x5b4>
+ 8003a5a:	687b      	ldr	r3, [r7, #4]
+ 8003a5c:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
+ 8003a60:	4a1d      	ldr	r2, [pc, #116]	; (8003ad8 <lcdControllerInit+0x5d8>)
+ 8003a62:	4293      	cmp	r3, r2
+ 8003a64:	d92e      	bls.n	8003ac4 <lcdControllerInit+0x5c4>
 			{
 				lcdController->countDelay = FALSE;
- 8003a56:	687b      	ldr	r3, [r7, #4]
- 8003a58:	2200      	movs	r2, #0
- 8003a5a:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
-				lcdController->delayCounter = 0;
- 8003a5e:	687b      	ldr	r3, [r7, #4]
- 8003a60:	2200      	movs	r2, #0
- 8003a62:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
-				lcdController->command = COMMAND_0;
  8003a66:	687b      	ldr	r3, [r7, #4]
  8003a68:	2200      	movs	r2, #0
- 8003a6a:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
-				lcdController->initialized = TRUE;
+ 8003a6a:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+				lcdController->delayCounter = 0;
  8003a6e:	687b      	ldr	r3, [r7, #4]
- 8003a70:	2201      	movs	r2, #1
- 8003a72:	f883 208f 	strb.w	r2, [r3, #143]	; 0x8f
-				lcdController->byteToSend = COMMAND;
+ 8003a70:	2200      	movs	r2, #0
+ 8003a72:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
+				lcdController->command = COMMAND_0;
  8003a76:	687b      	ldr	r3, [r7, #4]
  8003a78:	2200      	movs	r2, #0
- 8003a7a:	f883 2095 	strb.w	r2, [r3, #149]	; 0x95
+ 8003a7a:	f883 208e 	strb.w	r2, [r3, #142]	; 0x8e
+				lcdController->initialized = TRUE;
+ 8003a7e:	687b      	ldr	r3, [r7, #4]
+ 8003a80:	2201      	movs	r2, #1
+ 8003a82:	f883 208f 	strb.w	r2, [r3, #143]	; 0x8f
+				lcdController->byteToSend = COMMAND;
+ 8003a86:	687b      	ldr	r3, [r7, #4]
+ 8003a88:	2200      	movs	r2, #0
+ 8003a8a:	f883 2095 	strb.w	r2, [r3, #149]	; 0x95
 				lcdControllerSetBacklight(lcdController, BL_60_PERCENT);
- 8003a7e:	211e      	movs	r1, #30
- 8003a80:	6878      	ldr	r0, [r7, #4]
- 8003a82:	f000 f97f 	bl	8003d84 <lcdControllerSetBacklight>
+ 8003a8e:	211e      	movs	r1, #30
+ 8003a90:	6878      	ldr	r0, [r7, #4]
+ 8003a92:	f000 f97f 	bl	8003d94 <lcdControllerSetBacklight>
 			}
 			break;
- 8003a86:	e015      	b.n	8003ab4 <lcdControllerInit+0x5b4>
-			break;
- 8003a88:	bf00      	nop
- 8003a8a:	e014      	b.n	8003ab6 <lcdControllerInit+0x5b6>
-			break;
- 8003a8c:	bf00      	nop
- 8003a8e:	e012      	b.n	8003ab6 <lcdControllerInit+0x5b6>
-			break;
- 8003a90:	bf00      	nop
- 8003a92:	e010      	b.n	8003ab6 <lcdControllerInit+0x5b6>
-			break;
- 8003a94:	bf00      	nop
- 8003a96:	e00e      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003a96:	e015      	b.n	8003ac4 <lcdControllerInit+0x5c4>
 			break;
  8003a98:	bf00      	nop
- 8003a9a:	e00c      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003a9a:	e014      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003a9c:	bf00      	nop
- 8003a9e:	e00a      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003a9e:	e012      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003aa0:	bf00      	nop
- 8003aa2:	e008      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003aa2:	e010      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003aa4:	bf00      	nop
- 8003aa6:	e006      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003aa6:	e00e      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003aa8:	bf00      	nop
- 8003aaa:	e004      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003aaa:	e00c      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003aac:	bf00      	nop
- 8003aae:	e002      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003aae:	e00a      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003ab0:	bf00      	nop
- 8003ab2:	e000      	b.n	8003ab6 <lcdControllerInit+0x5b6>
+ 8003ab2:	e008      	b.n	8003ac6 <lcdControllerInit+0x5c6>
 			break;
  8003ab4:	bf00      	nop
+ 8003ab6:	e006      	b.n	8003ac6 <lcdControllerInit+0x5c6>
+			break;
+ 8003ab8:	bf00      	nop
+ 8003aba:	e004      	b.n	8003ac6 <lcdControllerInit+0x5c6>
+			break;
+ 8003abc:	bf00      	nop
+ 8003abe:	e002      	b.n	8003ac6 <lcdControllerInit+0x5c6>
+			break;
+ 8003ac0:	bf00      	nop
+ 8003ac2:	e000      	b.n	8003ac6 <lcdControllerInit+0x5c6>
+			break;
+ 8003ac4:	bf00      	nop
 	}
 }
- 8003ab6:	bf00      	nop
- 8003ab8:	3708      	adds	r7, #8
- 8003aba:	46bd      	mov	sp, r7
- 8003abc:	bd80      	pop	{r7, pc}
- 8003abe:	bf00      	nop
- 8003ac0:	08004144 	.word	0x08004144
- 8003ac4:	08004158 	.word	0x08004158
- 8003ac8:	00030d3f 	.word	0x00030d3f
+ 8003ac6:	bf00      	nop
+ 8003ac8:	3708      	adds	r7, #8
+ 8003aca:	46bd      	mov	sp, r7
+ 8003acc:	bd80      	pop	{r7, pc}
+ 8003ace:	bf00      	nop
+ 8003ad0:	08004154 	.word	0x08004154
+ 8003ad4:	08004168 	.word	0x08004168
+ 8003ad8:	00030d3f 	.word	0x00030d3f
 
-08003acc <lcdControllerUpdate>:
+08003adc <lcdControllerUpdate>:
 
 void lcdControllerUpdate(LcdController *lcdController)
 {
- 8003acc:	b5b0      	push	{r4, r5, r7, lr}
- 8003ace:	b084      	sub	sp, #16
- 8003ad0:	af00      	add	r7, sp, #0
- 8003ad2:	6078      	str	r0, [r7, #4]
+ 8003adc:	b5b0      	push	{r4, r5, r7, lr}
+ 8003ade:	b084      	sub	sp, #16
+ 8003ae0:	af00      	add	r7, sp, #0
+ 8003ae2:	6078      	str	r0, [r7, #4]
 	uint8_t currentCharInDisplay = lcdController->stringMatrixShow[lcdController->currentRow][lcdController->currentColumm];
- 8003ad4:	687b      	ldr	r3, [r7, #4]
- 8003ad6:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003ada:	4619      	mov	r1, r3
- 8003adc:	687b      	ldr	r3, [r7, #4]
- 8003ade:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003ae2:	4618      	mov	r0, r3
- 8003ae4:	687a      	ldr	r2, [r7, #4]
- 8003ae6:	460b      	mov	r3, r1
- 8003ae8:	011b      	lsls	r3, r3, #4
- 8003aea:	440b      	add	r3, r1
- 8003aec:	4413      	add	r3, r2
- 8003aee:	4403      	add	r3, r0
- 8003af0:	3344      	adds	r3, #68	; 0x44
- 8003af2:	781b      	ldrb	r3, [r3, #0]
- 8003af4:	73bb      	strb	r3, [r7, #14]
+ 8003ae4:	687b      	ldr	r3, [r7, #4]
+ 8003ae6:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003aea:	4619      	mov	r1, r3
+ 8003aec:	687b      	ldr	r3, [r7, #4]
+ 8003aee:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003af2:	4618      	mov	r0, r3
+ 8003af4:	687a      	ldr	r2, [r7, #4]
+ 8003af6:	460b      	mov	r3, r1
+ 8003af8:	011b      	lsls	r3, r3, #4
+ 8003afa:	440b      	add	r3, r1
+ 8003afc:	4413      	add	r3, r2
+ 8003afe:	4403      	add	r3, r0
+ 8003b00:	3344      	adds	r3, #68	; 0x44
+ 8003b02:	781b      	ldrb	r3, [r3, #0]
+ 8003b04:	73bb      	strb	r3, [r7, #14]
 	uint8_t newCharToDisplay = lcdController->stringMatrixBuffer[lcdController->currentRow][lcdController->currentColumm];
- 8003af6:	687b      	ldr	r3, [r7, #4]
- 8003af8:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003afc:	4619      	mov	r1, r3
- 8003afe:	687b      	ldr	r3, [r7, #4]
- 8003b00:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b04:	4618      	mov	r0, r3
- 8003b06:	687a      	ldr	r2, [r7, #4]
- 8003b08:	460b      	mov	r3, r1
- 8003b0a:	011b      	lsls	r3, r3, #4
- 8003b0c:	440b      	add	r3, r1
- 8003b0e:	4413      	add	r3, r2
- 8003b10:	4403      	add	r3, r0
- 8003b12:	781b      	ldrb	r3, [r3, #0]
- 8003b14:	737b      	strb	r3, [r7, #13]
+ 8003b06:	687b      	ldr	r3, [r7, #4]
+ 8003b08:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003b0c:	4619      	mov	r1, r3
+ 8003b0e:	687b      	ldr	r3, [r7, #4]
+ 8003b10:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003b14:	4618      	mov	r0, r3
+ 8003b16:	687a      	ldr	r2, [r7, #4]
+ 8003b18:	460b      	mov	r3, r1
+ 8003b1a:	011b      	lsls	r3, r3, #4
+ 8003b1c:	440b      	add	r3, r1
+ 8003b1e:	4413      	add	r3, r2
+ 8003b20:	4403      	add	r3, r0
+ 8003b22:	781b      	ldrb	r3, [r3, #0]
+ 8003b24:	737b      	strb	r3, [r7, #13]
 	uint8_t position = 0;
- 8003b16:	2300      	movs	r3, #0
- 8003b18:	73fb      	strb	r3, [r7, #15]
+ 8003b26:	2300      	movs	r3, #0
+ 8003b28:	73fb      	strb	r3, [r7, #15]
 
 	if(currentCharInDisplay != newCharToDisplay)
- 8003b1a:	7bba      	ldrb	r2, [r7, #14]
- 8003b1c:	7b7b      	ldrb	r3, [r7, #13]
- 8003b1e:	429a      	cmp	r2, r3
- 8003b20:	d02f      	beq.n	8003b82 <lcdControllerUpdate+0xb6>
+ 8003b2a:	7bba      	ldrb	r2, [r7, #14]
+ 8003b2c:	7b7b      	ldrb	r3, [r7, #13]
+ 8003b2e:	429a      	cmp	r2, r3
+ 8003b30:	d02f      	beq.n	8003b92 <lcdControllerUpdate+0xb6>
 	{
 		lcdController->updatePosition = TRUE;
- 8003b22:	687b      	ldr	r3, [r7, #4]
- 8003b24:	2201      	movs	r2, #1
- 8003b26:	f883 2096 	strb.w	r2, [r3, #150]	; 0x96
+ 8003b32:	687b      	ldr	r3, [r7, #4]
+ 8003b34:	2201      	movs	r2, #1
+ 8003b36:	f883 2096 	strb.w	r2, [r3, #150]	; 0x96
 
 		if(lcdController->currentRow == 0)
- 8003b2a:	687b      	ldr	r3, [r7, #4]
- 8003b2c:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003b30:	2b00      	cmp	r3, #0
- 8003b32:	d105      	bne.n	8003b40 <lcdControllerUpdate+0x74>
+ 8003b3a:	687b      	ldr	r3, [r7, #4]
+ 8003b3c:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003b40:	2b00      	cmp	r3, #0
+ 8003b42:	d105      	bne.n	8003b50 <lcdControllerUpdate+0x74>
 		{
 			position = ROW_0 + lcdController->currentColumm;
- 8003b34:	687b      	ldr	r3, [r7, #4]
- 8003b36:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b3a:	3b80      	subs	r3, #128	; 0x80
- 8003b3c:	73fb      	strb	r3, [r7, #15]
- 8003b3e:	e042      	b.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003b44:	687b      	ldr	r3, [r7, #4]
+ 8003b46:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003b4a:	3b80      	subs	r3, #128	; 0x80
+ 8003b4c:	73fb      	strb	r3, [r7, #15]
+ 8003b4e:	e042      	b.n	8003bd6 <lcdControllerUpdate+0xfa>
 		}
 		else if(lcdController->currentRow == 1)
- 8003b40:	687b      	ldr	r3, [r7, #4]
- 8003b42:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003b46:	2b01      	cmp	r3, #1
- 8003b48:	d105      	bne.n	8003b56 <lcdControllerUpdate+0x8a>
+ 8003b50:	687b      	ldr	r3, [r7, #4]
+ 8003b52:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003b56:	2b01      	cmp	r3, #1
+ 8003b58:	d105      	bne.n	8003b66 <lcdControllerUpdate+0x8a>
 		{
 			position = ROW_1 + lcdController->currentColumm;
- 8003b4a:	687b      	ldr	r3, [r7, #4]
- 8003b4c:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b50:	3b40      	subs	r3, #64	; 0x40
- 8003b52:	73fb      	strb	r3, [r7, #15]
- 8003b54:	e037      	b.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003b5a:	687b      	ldr	r3, [r7, #4]
+ 8003b5c:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003b60:	3b40      	subs	r3, #64	; 0x40
+ 8003b62:	73fb      	strb	r3, [r7, #15]
+ 8003b64:	e037      	b.n	8003bd6 <lcdControllerUpdate+0xfa>
 		}
 		else if(lcdController->currentRow == 2)
- 8003b56:	687b      	ldr	r3, [r7, #4]
- 8003b58:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003b5c:	2b02      	cmp	r3, #2
- 8003b5e:	d105      	bne.n	8003b6c <lcdControllerUpdate+0xa0>
+ 8003b66:	687b      	ldr	r3, [r7, #4]
+ 8003b68:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003b6c:	2b02      	cmp	r3, #2
+ 8003b6e:	d105      	bne.n	8003b7c <lcdControllerUpdate+0xa0>
 		{
 			position = ROW_2 + lcdController->currentColumm;
- 8003b60:	687b      	ldr	r3, [r7, #4]
- 8003b62:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b66:	3b70      	subs	r3, #112	; 0x70
- 8003b68:	73fb      	strb	r3, [r7, #15]
- 8003b6a:	e02c      	b.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003b70:	687b      	ldr	r3, [r7, #4]
+ 8003b72:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003b76:	3b70      	subs	r3, #112	; 0x70
+ 8003b78:	73fb      	strb	r3, [r7, #15]
+ 8003b7a:	e02c      	b.n	8003bd6 <lcdControllerUpdate+0xfa>
 		}
 		else if(lcdController->currentRow == 3)
- 8003b6c:	687b      	ldr	r3, [r7, #4]
- 8003b6e:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003b72:	2b03      	cmp	r3, #3
- 8003b74:	d127      	bne.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003b7c:	687b      	ldr	r3, [r7, #4]
+ 8003b7e:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003b82:	2b03      	cmp	r3, #3
+ 8003b84:	d127      	bne.n	8003bd6 <lcdControllerUpdate+0xfa>
 		{
 			position = ROW_3 + lcdController->currentColumm;
- 8003b76:	687b      	ldr	r3, [r7, #4]
- 8003b78:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b7c:	3b30      	subs	r3, #48	; 0x30
- 8003b7e:	73fb      	strb	r3, [r7, #15]
- 8003b80:	e021      	b.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003b86:	687b      	ldr	r3, [r7, #4]
+ 8003b88:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003b8c:	3b30      	subs	r3, #48	; 0x30
+ 8003b8e:	73fb      	strb	r3, [r7, #15]
+ 8003b90:	e021      	b.n	8003bd6 <lcdControllerUpdate+0xfa>
 		}
 	}
 	else
 	{
 		lcdController->currentColumm++;
- 8003b82:	687b      	ldr	r3, [r7, #4]
- 8003b84:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b88:	3301      	adds	r3, #1
- 8003b8a:	b2da      	uxtb	r2, r3
- 8003b8c:	687b      	ldr	r3, [r7, #4]
- 8003b8e:	f883 2098 	strb.w	r2, [r3, #152]	; 0x98
-		if(lcdController->currentColumm > QTY_OF_CHARS_PER_ROW-1)
  8003b92:	687b      	ldr	r3, [r7, #4]
  8003b94:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003b98:	2b0f      	cmp	r3, #15
- 8003b9a:	d914      	bls.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003b98:	3301      	adds	r3, #1
+ 8003b9a:	b2da      	uxtb	r2, r3
+ 8003b9c:	687b      	ldr	r3, [r7, #4]
+ 8003b9e:	f883 2098 	strb.w	r2, [r3, #152]	; 0x98
+		if(lcdController->currentColumm > QTY_OF_CHARS_PER_ROW-1)
+ 8003ba2:	687b      	ldr	r3, [r7, #4]
+ 8003ba4:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003ba8:	2b0f      	cmp	r3, #15
+ 8003baa:	d914      	bls.n	8003bd6 <lcdControllerUpdate+0xfa>
 		{
 			lcdController->currentColumm = 0;
- 8003b9c:	687b      	ldr	r3, [r7, #4]
- 8003b9e:	2200      	movs	r2, #0
- 8003ba0:	f883 2098 	strb.w	r2, [r3, #152]	; 0x98
+ 8003bac:	687b      	ldr	r3, [r7, #4]
+ 8003bae:	2200      	movs	r2, #0
+ 8003bb0:	f883 2098 	strb.w	r2, [r3, #152]	; 0x98
 			lcdController->currentRow++;
- 8003ba4:	687b      	ldr	r3, [r7, #4]
- 8003ba6:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003baa:	3301      	adds	r3, #1
- 8003bac:	b2da      	uxtb	r2, r3
- 8003bae:	687b      	ldr	r3, [r7, #4]
- 8003bb0:	f883 2097 	strb.w	r2, [r3, #151]	; 0x97
-			if(lcdController->currentRow > QTY_OF_ROWS-1)
  8003bb4:	687b      	ldr	r3, [r7, #4]
  8003bb6:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003bba:	2b03      	cmp	r3, #3
- 8003bbc:	d903      	bls.n	8003bc6 <lcdControllerUpdate+0xfa>
+ 8003bba:	3301      	adds	r3, #1
+ 8003bbc:	b2da      	uxtb	r2, r3
+ 8003bbe:	687b      	ldr	r3, [r7, #4]
+ 8003bc0:	f883 2097 	strb.w	r2, [r3, #151]	; 0x97
+			if(lcdController->currentRow > QTY_OF_ROWS-1)
+ 8003bc4:	687b      	ldr	r3, [r7, #4]
+ 8003bc6:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003bca:	2b03      	cmp	r3, #3
+ 8003bcc:	d903      	bls.n	8003bd6 <lcdControllerUpdate+0xfa>
 			{
 				lcdController->currentRow = 0;
- 8003bbe:	687b      	ldr	r3, [r7, #4]
- 8003bc0:	2200      	movs	r2, #0
- 8003bc2:	f883 2097 	strb.w	r2, [r3, #151]	; 0x97
+ 8003bce:	687b      	ldr	r3, [r7, #4]
+ 8003bd0:	2200      	movs	r2, #0
+ 8003bd2:	f883 2097 	strb.w	r2, [r3, #151]	; 0x97
 			}
 		}
 	}
 
 	if (lcdController->updatePosition == TRUE)
- 8003bc6:	687b      	ldr	r3, [r7, #4]
- 8003bc8:	f893 3096 	ldrb.w	r3, [r3, #150]	; 0x96
- 8003bcc:	2b01      	cmp	r3, #1
- 8003bce:	d177      	bne.n	8003cc0 <lcdControllerUpdate+0x1f4>
+ 8003bd6:	687b      	ldr	r3, [r7, #4]
+ 8003bd8:	f893 3096 	ldrb.w	r3, [r3, #150]	; 0x96
+ 8003bdc:	2b01      	cmp	r3, #1
+ 8003bde:	d177      	bne.n	8003cd0 <lcdControllerUpdate+0x1f4>
 	{
 		switch (lcdController->byteToSend)
- 8003bd0:	687b      	ldr	r3, [r7, #4]
- 8003bd2:	f893 3095 	ldrb.w	r3, [r3, #149]	; 0x95
- 8003bd6:	2b00      	cmp	r3, #0
- 8003bd8:	d002      	beq.n	8003be0 <lcdControllerUpdate+0x114>
- 8003bda:	2b01      	cmp	r3, #1
- 8003bdc:	d026      	beq.n	8003c2c <lcdControllerUpdate+0x160>
+ 8003be0:	687b      	ldr	r3, [r7, #4]
+ 8003be2:	f893 3095 	ldrb.w	r3, [r3, #149]	; 0x95
+ 8003be6:	2b00      	cmp	r3, #0
+ 8003be8:	d002      	beq.n	8003bf0 <lcdControllerUpdate+0x114>
+ 8003bea:	2b01      	cmp	r3, #1
+ 8003bec:	d026      	beq.n	8003c3c <lcdControllerUpdate+0x160>
 					lcdSendByte(lcdController, DATA, newCharToDisplay);
 				}
 				break;
 
 			default:
 				break;
- 8003bde:	e074      	b.n	8003cca <lcdControllerUpdate+0x1fe>
+ 8003bee:	e074      	b.n	8003cda <lcdControllerUpdate+0x1fe>
 				if(lcdController->byteSended == TRUE)
- 8003be0:	687b      	ldr	r3, [r7, #4]
- 8003be2:	f893 30a7 	ldrb.w	r3, [r3, #167]	; 0xa7
- 8003be6:	2b01      	cmp	r3, #1
- 8003be8:	d119      	bne.n	8003c1e <lcdControllerUpdate+0x152>
+ 8003bf0:	687b      	ldr	r3, [r7, #4]
+ 8003bf2:	f893 30a7 	ldrb.w	r3, [r3, #167]	; 0xa7
+ 8003bf6:	2b01      	cmp	r3, #1
+ 8003bf8:	d119      	bne.n	8003c2e <lcdControllerUpdate+0x152>
 					lcdController->countDelay = TRUE;
- 8003bea:	687b      	ldr	r3, [r7, #4]
- 8003bec:	2201      	movs	r2, #1
- 8003bee:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+ 8003bfa:	687b      	ldr	r3, [r7, #4]
+ 8003bfc:	2201      	movs	r2, #1
+ 8003bfe:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
 					if(lcdController->delayCounter >= DELAY_150_MICRO_SECONDS)
- 8003bf2:	687b      	ldr	r3, [r7, #4]
- 8003bf4:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
- 8003bf8:	2b0e      	cmp	r3, #14
- 8003bfa:	d963      	bls.n	8003cc4 <lcdControllerUpdate+0x1f8>
+ 8003c02:	687b      	ldr	r3, [r7, #4]
+ 8003c04:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
+ 8003c08:	2b0e      	cmp	r3, #14
+ 8003c0a:	d963      	bls.n	8003cd4 <lcdControllerUpdate+0x1f8>
 						lcdController->countDelay = FALSE;
- 8003bfc:	687b      	ldr	r3, [r7, #4]
- 8003bfe:	2200      	movs	r2, #0
- 8003c00:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
-						lcdController->delayCounter = 0;
- 8003c04:	687b      	ldr	r3, [r7, #4]
- 8003c06:	2200      	movs	r2, #0
- 8003c08:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
-						lcdController->byteSended = FALSE;
  8003c0c:	687b      	ldr	r3, [r7, #4]
  8003c0e:	2200      	movs	r2, #0
- 8003c10:	f883 20a7 	strb.w	r2, [r3, #167]	; 0xa7
-						lcdController->byteToSend = DATA;
- 8003c14:	687b      	ldr	r3, [r7, #4]
- 8003c16:	2201      	movs	r2, #1
- 8003c18:	f883 2095 	strb.w	r2, [r3, #149]	; 0x95
-				break;
- 8003c1c:	e052      	b.n	8003cc4 <lcdControllerUpdate+0x1f8>
-					lcdSendByte(lcdController, COMMAND, position);
- 8003c1e:	7bfb      	ldrb	r3, [r7, #15]
- 8003c20:	461a      	mov	r2, r3
- 8003c22:	2100      	movs	r1, #0
- 8003c24:	6878      	ldr	r0, [r7, #4]
- 8003c26:	f7ff f9d5 	bl	8002fd4 <lcdSendByte>
-				break;
- 8003c2a:	e04b      	b.n	8003cc4 <lcdControllerUpdate+0x1f8>
-				if(lcdController->byteSended == TRUE)
- 8003c2c:	687b      	ldr	r3, [r7, #4]
- 8003c2e:	f893 30a7 	ldrb.w	r3, [r3, #167]	; 0xa7
- 8003c32:	2b01      	cmp	r3, #1
- 8003c34:	d13d      	bne.n	8003cb2 <lcdControllerUpdate+0x1e6>
-					lcdController->countDelay = TRUE;
- 8003c36:	687b      	ldr	r3, [r7, #4]
- 8003c38:	2201      	movs	r2, #1
- 8003c3a:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
-					if(lcdController->delayCounter >= DELAY_150_MICRO_SECONDS)
- 8003c3e:	687b      	ldr	r3, [r7, #4]
- 8003c40:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
- 8003c44:	2b0e      	cmp	r3, #14
- 8003c46:	d93f      	bls.n	8003cc8 <lcdControllerUpdate+0x1fc>
-						lcdController->countDelay = FALSE;
- 8003c48:	687b      	ldr	r3, [r7, #4]
- 8003c4a:	2200      	movs	r2, #0
- 8003c4c:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+ 8003c10:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
 						lcdController->delayCounter = 0;
- 8003c50:	687b      	ldr	r3, [r7, #4]
- 8003c52:	2200      	movs	r2, #0
- 8003c54:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
+ 8003c14:	687b      	ldr	r3, [r7, #4]
+ 8003c16:	2200      	movs	r2, #0
+ 8003c18:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
 						lcdController->byteSended = FALSE;
+ 8003c1c:	687b      	ldr	r3, [r7, #4]
+ 8003c1e:	2200      	movs	r2, #0
+ 8003c20:	f883 20a7 	strb.w	r2, [r3, #167]	; 0xa7
+						lcdController->byteToSend = DATA;
+ 8003c24:	687b      	ldr	r3, [r7, #4]
+ 8003c26:	2201      	movs	r2, #1
+ 8003c28:	f883 2095 	strb.w	r2, [r3, #149]	; 0x95
+				break;
+ 8003c2c:	e052      	b.n	8003cd4 <lcdControllerUpdate+0x1f8>
+					lcdSendByte(lcdController, COMMAND, position);
+ 8003c2e:	7bfb      	ldrb	r3, [r7, #15]
+ 8003c30:	461a      	mov	r2, r3
+ 8003c32:	2100      	movs	r1, #0
+ 8003c34:	6878      	ldr	r0, [r7, #4]
+ 8003c36:	f7ff f9cd 	bl	8002fd4 <lcdSendByte>
+				break;
+ 8003c3a:	e04b      	b.n	8003cd4 <lcdControllerUpdate+0x1f8>
+				if(lcdController->byteSended == TRUE)
+ 8003c3c:	687b      	ldr	r3, [r7, #4]
+ 8003c3e:	f893 30a7 	ldrb.w	r3, [r3, #167]	; 0xa7
+ 8003c42:	2b01      	cmp	r3, #1
+ 8003c44:	d13d      	bne.n	8003cc2 <lcdControllerUpdate+0x1e6>
+					lcdController->countDelay = TRUE;
+ 8003c46:	687b      	ldr	r3, [r7, #4]
+ 8003c48:	2201      	movs	r2, #1
+ 8003c4a:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+					if(lcdController->delayCounter >= DELAY_150_MICRO_SECONDS)
+ 8003c4e:	687b      	ldr	r3, [r7, #4]
+ 8003c50:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
+ 8003c54:	2b0e      	cmp	r3, #14
+ 8003c56:	d93f      	bls.n	8003cd8 <lcdControllerUpdate+0x1fc>
+						lcdController->countDelay = FALSE;
  8003c58:	687b      	ldr	r3, [r7, #4]
  8003c5a:	2200      	movs	r2, #0
- 8003c5c:	f883 20a7 	strb.w	r2, [r3, #167]	; 0xa7
-						lcdController->byteToSend = COMMAND;
+ 8003c5c:	f883 20a8 	strb.w	r2, [r3, #168]	; 0xa8
+						lcdController->delayCounter = 0;
  8003c60:	687b      	ldr	r3, [r7, #4]
  8003c62:	2200      	movs	r2, #0
- 8003c64:	f883 2095 	strb.w	r2, [r3, #149]	; 0x95
-						lcdController->updatePosition = FALSE;
+ 8003c64:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
+						lcdController->byteSended = FALSE;
  8003c68:	687b      	ldr	r3, [r7, #4]
  8003c6a:	2200      	movs	r2, #0
- 8003c6c:	f883 2096 	strb.w	r2, [r3, #150]	; 0x96
-						lcdController->stringMatrixShow[lcdController->currentRow][lcdController->currentColumm] = lcdController->stringMatrixBuffer[lcdController->currentRow][lcdController->currentColumm];
+ 8003c6c:	f883 20a7 	strb.w	r2, [r3, #167]	; 0xa7
+						lcdController->byteToSend = COMMAND;
  8003c70:	687b      	ldr	r3, [r7, #4]
- 8003c72:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003c76:	4618      	mov	r0, r3
+ 8003c72:	2200      	movs	r2, #0
+ 8003c74:	f883 2095 	strb.w	r2, [r3, #149]	; 0x95
+						lcdController->updatePosition = FALSE;
  8003c78:	687b      	ldr	r3, [r7, #4]
- 8003c7a:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003c7e:	461d      	mov	r5, r3
+ 8003c7a:	2200      	movs	r2, #0
+ 8003c7c:	f883 2096 	strb.w	r2, [r3, #150]	; 0x96
+						lcdController->stringMatrixShow[lcdController->currentRow][lcdController->currentColumm] = lcdController->stringMatrixBuffer[lcdController->currentRow][lcdController->currentColumm];
  8003c80:	687b      	ldr	r3, [r7, #4]
  8003c82:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
- 8003c86:	4619      	mov	r1, r3
+ 8003c86:	4618      	mov	r0, r3
  8003c88:	687b      	ldr	r3, [r7, #4]
  8003c8a:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
- 8003c8e:	461c      	mov	r4, r3
- 8003c90:	687a      	ldr	r2, [r7, #4]
- 8003c92:	4603      	mov	r3, r0
- 8003c94:	011b      	lsls	r3, r3, #4
- 8003c96:	4403      	add	r3, r0
- 8003c98:	4413      	add	r3, r2
- 8003c9a:	442b      	add	r3, r5
- 8003c9c:	7818      	ldrb	r0, [r3, #0]
- 8003c9e:	687a      	ldr	r2, [r7, #4]
- 8003ca0:	460b      	mov	r3, r1
- 8003ca2:	011b      	lsls	r3, r3, #4
- 8003ca4:	440b      	add	r3, r1
- 8003ca6:	4413      	add	r3, r2
- 8003ca8:	4423      	add	r3, r4
- 8003caa:	3344      	adds	r3, #68	; 0x44
- 8003cac:	4602      	mov	r2, r0
- 8003cae:	701a      	strb	r2, [r3, #0]
+ 8003c8e:	461d      	mov	r5, r3
+ 8003c90:	687b      	ldr	r3, [r7, #4]
+ 8003c92:	f893 3097 	ldrb.w	r3, [r3, #151]	; 0x97
+ 8003c96:	4619      	mov	r1, r3
+ 8003c98:	687b      	ldr	r3, [r7, #4]
+ 8003c9a:	f893 3098 	ldrb.w	r3, [r3, #152]	; 0x98
+ 8003c9e:	461c      	mov	r4, r3
+ 8003ca0:	687a      	ldr	r2, [r7, #4]
+ 8003ca2:	4603      	mov	r3, r0
+ 8003ca4:	011b      	lsls	r3, r3, #4
+ 8003ca6:	4403      	add	r3, r0
+ 8003ca8:	4413      	add	r3, r2
+ 8003caa:	442b      	add	r3, r5
+ 8003cac:	7818      	ldrb	r0, [r3, #0]
+ 8003cae:	687a      	ldr	r2, [r7, #4]
+ 8003cb0:	460b      	mov	r3, r1
+ 8003cb2:	011b      	lsls	r3, r3, #4
+ 8003cb4:	440b      	add	r3, r1
+ 8003cb6:	4413      	add	r3, r2
+ 8003cb8:	4423      	add	r3, r4
+ 8003cba:	3344      	adds	r3, #68	; 0x44
+ 8003cbc:	4602      	mov	r2, r0
+ 8003cbe:	701a      	strb	r2, [r3, #0]
 				break;
- 8003cb0:	e00a      	b.n	8003cc8 <lcdControllerUpdate+0x1fc>
+ 8003cc0:	e00a      	b.n	8003cd8 <lcdControllerUpdate+0x1fc>
 					lcdSendByte(lcdController, DATA, newCharToDisplay);
- 8003cb2:	7b7b      	ldrb	r3, [r7, #13]
- 8003cb4:	461a      	mov	r2, r3
- 8003cb6:	2101      	movs	r1, #1
- 8003cb8:	6878      	ldr	r0, [r7, #4]
- 8003cba:	f7ff f98b 	bl	8002fd4 <lcdSendByte>
+ 8003cc2:	7b7b      	ldrb	r3, [r7, #13]
+ 8003cc4:	461a      	mov	r2, r3
+ 8003cc6:	2101      	movs	r1, #1
+ 8003cc8:	6878      	ldr	r0, [r7, #4]
+ 8003cca:	f7ff f983 	bl	8002fd4 <lcdSendByte>
 				break;
- 8003cbe:	e003      	b.n	8003cc8 <lcdControllerUpdate+0x1fc>
+ 8003cce:	e003      	b.n	8003cd8 <lcdControllerUpdate+0x1fc>
 		}
 	}
- 8003cc0:	bf00      	nop
- 8003cc2:	e002      	b.n	8003cca <lcdControllerUpdate+0x1fe>
+ 8003cd0:	bf00      	nop
+ 8003cd2:	e002      	b.n	8003cda <lcdControllerUpdate+0x1fe>
 				break;
- 8003cc4:	bf00      	nop
- 8003cc6:	e000      	b.n	8003cca <lcdControllerUpdate+0x1fe>
+ 8003cd4:	bf00      	nop
+ 8003cd6:	e000      	b.n	8003cda <lcdControllerUpdate+0x1fe>
 				break;
- 8003cc8:	bf00      	nop
+ 8003cd8:	bf00      	nop
 }
- 8003cca:	bf00      	nop
- 8003ccc:	3710      	adds	r7, #16
- 8003cce:	46bd      	mov	sp, r7
- 8003cd0:	bdb0      	pop	{r4, r5, r7, pc}
+ 8003cda:	bf00      	nop
+ 8003cdc:	3710      	adds	r7, #16
+ 8003cde:	46bd      	mov	sp, r7
+ 8003ce0:	bdb0      	pop	{r4, r5, r7, pc}
 
-08003cd2 <lcdControllerSetString>:
+08003ce2 <lcdControllerSetString>:
 
 void lcdControllerSetString(LcdController *lcdController, LcdRow lcdRow, uint8_t *string)
 {
- 8003cd2:	b580      	push	{r7, lr}
- 8003cd4:	b086      	sub	sp, #24
- 8003cd6:	af00      	add	r7, sp, #0
- 8003cd8:	60f8      	str	r0, [r7, #12]
- 8003cda:	460b      	mov	r3, r1
- 8003cdc:	607a      	str	r2, [r7, #4]
- 8003cde:	72fb      	strb	r3, [r7, #11]
+ 8003ce2:	b580      	push	{r7, lr}
+ 8003ce4:	b086      	sub	sp, #24
+ 8003ce6:	af00      	add	r7, sp, #0
+ 8003ce8:	60f8      	str	r0, [r7, #12]
+ 8003cea:	460b      	mov	r3, r1
+ 8003cec:	607a      	str	r2, [r7, #4]
+ 8003cee:	72fb      	strb	r3, [r7, #11]
 	uint8_t stringLength = strlen((char *) string);
- 8003ce0:	6878      	ldr	r0, [r7, #4]
- 8003ce2:	f7fc fa8f 	bl	8000204 <strlen>
- 8003ce6:	4603      	mov	r3, r0
- 8003ce8:	75fb      	strb	r3, [r7, #23]
+ 8003cf0:	6878      	ldr	r0, [r7, #4]
+ 8003cf2:	f7fc fa87 	bl	8000204 <strlen>
+ 8003cf6:	4603      	mov	r3, r0
+ 8003cf8:	75fb      	strb	r3, [r7, #23]
 	switch (lcdRow)
- 8003cea:	7afb      	ldrb	r3, [r7, #11]
- 8003cec:	2bd0      	cmp	r3, #208	; 0xd0
- 8003cee:	d035      	beq.n	8003d5c <lcdControllerSetString+0x8a>
- 8003cf0:	2bd0      	cmp	r3, #208	; 0xd0
- 8003cf2:	dc42      	bgt.n	8003d7a <lcdControllerSetString+0xa8>
- 8003cf4:	2bc0      	cmp	r3, #192	; 0xc0
- 8003cf6:	d013      	beq.n	8003d20 <lcdControllerSetString+0x4e>
- 8003cf8:	2bc0      	cmp	r3, #192	; 0xc0
- 8003cfa:	dc3e      	bgt.n	8003d7a <lcdControllerSetString+0xa8>
- 8003cfc:	2b80      	cmp	r3, #128	; 0x80
- 8003cfe:	d002      	beq.n	8003d06 <lcdControllerSetString+0x34>
- 8003d00:	2b90      	cmp	r3, #144	; 0x90
- 8003d02:	d01c      	beq.n	8003d3e <lcdControllerSetString+0x6c>
+ 8003cfa:	7afb      	ldrb	r3, [r7, #11]
+ 8003cfc:	2bd0      	cmp	r3, #208	; 0xd0
+ 8003cfe:	d035      	beq.n	8003d6c <lcdControllerSetString+0x8a>
+ 8003d00:	2bd0      	cmp	r3, #208	; 0xd0
+ 8003d02:	dc42      	bgt.n	8003d8a <lcdControllerSetString+0xa8>
+ 8003d04:	2bc0      	cmp	r3, #192	; 0xc0
+ 8003d06:	d013      	beq.n	8003d30 <lcdControllerSetString+0x4e>
+ 8003d08:	2bc0      	cmp	r3, #192	; 0xc0
+ 8003d0a:	dc3e      	bgt.n	8003d8a <lcdControllerSetString+0xa8>
+ 8003d0c:	2b80      	cmp	r3, #128	; 0x80
+ 8003d0e:	d002      	beq.n	8003d16 <lcdControllerSetString+0x34>
+ 8003d10:	2b90      	cmp	r3, #144	; 0x90
+ 8003d12:	d01c      	beq.n	8003d4e <lcdControllerSetString+0x6c>
 			memset((char *) lcdController->stringMatrixBuffer[3], ' ', QTY_OF_CHARS_PER_ROW);
 			strncpy((char *) lcdController->stringMatrixBuffer[3], (char *) string, stringLength);
 			break;
 
 		default:
 			break;
- 8003d04:	e039      	b.n	8003d7a <lcdControllerSetString+0xa8>
+ 8003d14:	e039      	b.n	8003d8a <lcdControllerSetString+0xa8>
 			memset((char *) lcdController->stringMatrixBuffer[0], ' ', QTY_OF_CHARS_PER_ROW);
- 8003d06:	68fb      	ldr	r3, [r7, #12]
- 8003d08:	2210      	movs	r2, #16
- 8003d0a:	2120      	movs	r1, #32
- 8003d0c:	4618      	mov	r0, r3
- 8003d0e:	f000 f9f1 	bl	80040f4 <memset>
+ 8003d16:	68fb      	ldr	r3, [r7, #12]
+ 8003d18:	2210      	movs	r2, #16
+ 8003d1a:	2120      	movs	r1, #32
+ 8003d1c:	4618      	mov	r0, r3
+ 8003d1e:	f000 f9f1 	bl	8004104 <memset>
 			strncpy((char *) lcdController->stringMatrixBuffer[0], (char *) string, stringLength);
- 8003d12:	68fb      	ldr	r3, [r7, #12]
- 8003d14:	7dfa      	ldrb	r2, [r7, #23]
- 8003d16:	6879      	ldr	r1, [r7, #4]
- 8003d18:	4618      	mov	r0, r3
- 8003d1a:	f000 f9f3 	bl	8004104 <strncpy>
-			break;
- 8003d1e:	e02d      	b.n	8003d7c <lcdControllerSetString+0xaa>
-			memset((char *) lcdController->stringMatrixBuffer[1], ' ', QTY_OF_CHARS_PER_ROW);
- 8003d20:	68fb      	ldr	r3, [r7, #12]
- 8003d22:	3311      	adds	r3, #17
- 8003d24:	2210      	movs	r2, #16
- 8003d26:	2120      	movs	r1, #32
+ 8003d22:	68fb      	ldr	r3, [r7, #12]
+ 8003d24:	7dfa      	ldrb	r2, [r7, #23]
+ 8003d26:	6879      	ldr	r1, [r7, #4]
  8003d28:	4618      	mov	r0, r3
- 8003d2a:	f000 f9e3 	bl	80040f4 <memset>
+ 8003d2a:	f000 f9f3 	bl	8004114 <strncpy>
+			break;
+ 8003d2e:	e02d      	b.n	8003d8c <lcdControllerSetString+0xaa>
+			memset((char *) lcdController->stringMatrixBuffer[1], ' ', QTY_OF_CHARS_PER_ROW);
+ 8003d30:	68fb      	ldr	r3, [r7, #12]
+ 8003d32:	3311      	adds	r3, #17
+ 8003d34:	2210      	movs	r2, #16
+ 8003d36:	2120      	movs	r1, #32
+ 8003d38:	4618      	mov	r0, r3
+ 8003d3a:	f000 f9e3 	bl	8004104 <memset>
 			strncpy((char *) lcdController->stringMatrixBuffer[1], (char *) string, stringLength);
- 8003d2e:	68fb      	ldr	r3, [r7, #12]
- 8003d30:	3311      	adds	r3, #17
- 8003d32:	7dfa      	ldrb	r2, [r7, #23]
- 8003d34:	6879      	ldr	r1, [r7, #4]
- 8003d36:	4618      	mov	r0, r3
- 8003d38:	f000 f9e4 	bl	8004104 <strncpy>
-			break;
- 8003d3c:	e01e      	b.n	8003d7c <lcdControllerSetString+0xaa>
-			memset((char *) lcdController->stringMatrixBuffer[2], ' ', QTY_OF_CHARS_PER_ROW);
  8003d3e:	68fb      	ldr	r3, [r7, #12]
- 8003d40:	3322      	adds	r3, #34	; 0x22
- 8003d42:	2210      	movs	r2, #16
- 8003d44:	2120      	movs	r1, #32
+ 8003d40:	3311      	adds	r3, #17
+ 8003d42:	7dfa      	ldrb	r2, [r7, #23]
+ 8003d44:	6879      	ldr	r1, [r7, #4]
  8003d46:	4618      	mov	r0, r3
- 8003d48:	f000 f9d4 	bl	80040f4 <memset>
+ 8003d48:	f000 f9e4 	bl	8004114 <strncpy>
+			break;
+ 8003d4c:	e01e      	b.n	8003d8c <lcdControllerSetString+0xaa>
+			memset((char *) lcdController->stringMatrixBuffer[2], ' ', QTY_OF_CHARS_PER_ROW);
+ 8003d4e:	68fb      	ldr	r3, [r7, #12]
+ 8003d50:	3322      	adds	r3, #34	; 0x22
+ 8003d52:	2210      	movs	r2, #16
+ 8003d54:	2120      	movs	r1, #32
+ 8003d56:	4618      	mov	r0, r3
+ 8003d58:	f000 f9d4 	bl	8004104 <memset>
 			strncpy((char *) lcdController->stringMatrixBuffer[2], (char *) string, stringLength);
- 8003d4c:	68fb      	ldr	r3, [r7, #12]
- 8003d4e:	3322      	adds	r3, #34	; 0x22
- 8003d50:	7dfa      	ldrb	r2, [r7, #23]
- 8003d52:	6879      	ldr	r1, [r7, #4]
- 8003d54:	4618      	mov	r0, r3
- 8003d56:	f000 f9d5 	bl	8004104 <strncpy>
-			break;
- 8003d5a:	e00f      	b.n	8003d7c <lcdControllerSetString+0xaa>
-			memset((char *) lcdController->stringMatrixBuffer[3], ' ', QTY_OF_CHARS_PER_ROW);
  8003d5c:	68fb      	ldr	r3, [r7, #12]
- 8003d5e:	3333      	adds	r3, #51	; 0x33
- 8003d60:	2210      	movs	r2, #16
- 8003d62:	2120      	movs	r1, #32
+ 8003d5e:	3322      	adds	r3, #34	; 0x22
+ 8003d60:	7dfa      	ldrb	r2, [r7, #23]
+ 8003d62:	6879      	ldr	r1, [r7, #4]
  8003d64:	4618      	mov	r0, r3
- 8003d66:	f000 f9c5 	bl	80040f4 <memset>
+ 8003d66:	f000 f9d5 	bl	8004114 <strncpy>
+			break;
+ 8003d6a:	e00f      	b.n	8003d8c <lcdControllerSetString+0xaa>
+			memset((char *) lcdController->stringMatrixBuffer[3], ' ', QTY_OF_CHARS_PER_ROW);
+ 8003d6c:	68fb      	ldr	r3, [r7, #12]
+ 8003d6e:	3333      	adds	r3, #51	; 0x33
+ 8003d70:	2210      	movs	r2, #16
+ 8003d72:	2120      	movs	r1, #32
+ 8003d74:	4618      	mov	r0, r3
+ 8003d76:	f000 f9c5 	bl	8004104 <memset>
 			strncpy((char *) lcdController->stringMatrixBuffer[3], (char *) string, stringLength);
- 8003d6a:	68fb      	ldr	r3, [r7, #12]
- 8003d6c:	3333      	adds	r3, #51	; 0x33
- 8003d6e:	7dfa      	ldrb	r2, [r7, #23]
- 8003d70:	6879      	ldr	r1, [r7, #4]
- 8003d72:	4618      	mov	r0, r3
- 8003d74:	f000 f9c6 	bl	8004104 <strncpy>
+ 8003d7a:	68fb      	ldr	r3, [r7, #12]
+ 8003d7c:	3333      	adds	r3, #51	; 0x33
+ 8003d7e:	7dfa      	ldrb	r2, [r7, #23]
+ 8003d80:	6879      	ldr	r1, [r7, #4]
+ 8003d82:	4618      	mov	r0, r3
+ 8003d84:	f000 f9c6 	bl	8004114 <strncpy>
 			break;
- 8003d78:	e000      	b.n	8003d7c <lcdControllerSetString+0xaa>
+ 8003d88:	e000      	b.n	8003d8c <lcdControllerSetString+0xaa>
 			break;
- 8003d7a:	bf00      	nop
+ 8003d8a:	bf00      	nop
 	}
 }
- 8003d7c:	bf00      	nop
- 8003d7e:	3718      	adds	r7, #24
- 8003d80:	46bd      	mov	sp, r7
- 8003d82:	bd80      	pop	{r7, pc}
+ 8003d8c:	bf00      	nop
+ 8003d8e:	3718      	adds	r7, #24
+ 8003d90:	46bd      	mov	sp, r7
+ 8003d92:	bd80      	pop	{r7, pc}
 
-08003d84 <lcdControllerSetBacklight>:
+08003d94 <lcdControllerSetBacklight>:
 
 void lcdControllerSetBacklight(LcdController *lcdController, BacklightPercent backlightPercent)
 {
- 8003d84:	b480      	push	{r7}
- 8003d86:	b083      	sub	sp, #12
- 8003d88:	af00      	add	r7, sp, #0
- 8003d8a:	6078      	str	r0, [r7, #4]
- 8003d8c:	460b      	mov	r3, r1
- 8003d8e:	70fb      	strb	r3, [r7, #3]
+ 8003d94:	b480      	push	{r7}
+ 8003d96:	b083      	sub	sp, #12
+ 8003d98:	af00      	add	r7, sp, #0
+ 8003d9a:	6078      	str	r0, [r7, #4]
+ 8003d9c:	460b      	mov	r3, r1
+ 8003d9e:	70fb      	strb	r3, [r7, #3]
 	__HAL_TIM_SET_COMPARE(lcdController->backlightPwmTimer, lcdController->backlightPwmChannel, backlightPercent);
- 8003d90:	687b      	ldr	r3, [r7, #4]
- 8003d92:	f893 308c 	ldrb.w	r3, [r3, #140]	; 0x8c
- 8003d96:	2b00      	cmp	r3, #0
- 8003d98:	d106      	bne.n	8003da8 <lcdControllerSetBacklight+0x24>
- 8003d9a:	687b      	ldr	r3, [r7, #4]
- 8003d9c:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
- 8003da0:	681b      	ldr	r3, [r3, #0]
- 8003da2:	78fa      	ldrb	r2, [r7, #3]
- 8003da4:	635a      	str	r2, [r3, #52]	; 0x34
+ 8003da0:	687b      	ldr	r3, [r7, #4]
+ 8003da2:	f893 308c 	ldrb.w	r3, [r3, #140]	; 0x8c
+ 8003da6:	2b00      	cmp	r3, #0
+ 8003da8:	d106      	bne.n	8003db8 <lcdControllerSetBacklight+0x24>
+ 8003daa:	687b      	ldr	r3, [r7, #4]
+ 8003dac:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
+ 8003db0:	681b      	ldr	r3, [r3, #0]
+ 8003db2:	78fa      	ldrb	r2, [r7, #3]
+ 8003db4:	635a      	str	r2, [r3, #52]	; 0x34
 }
- 8003da6:	e01d      	b.n	8003de4 <lcdControllerSetBacklight+0x60>
+ 8003db6:	e01d      	b.n	8003df4 <lcdControllerSetBacklight+0x60>
 	__HAL_TIM_SET_COMPARE(lcdController->backlightPwmTimer, lcdController->backlightPwmChannel, backlightPercent);
- 8003da8:	687b      	ldr	r3, [r7, #4]
- 8003daa:	f893 308c 	ldrb.w	r3, [r3, #140]	; 0x8c
- 8003dae:	2b04      	cmp	r3, #4
- 8003db0:	d106      	bne.n	8003dc0 <lcdControllerSetBacklight+0x3c>
- 8003db2:	687b      	ldr	r3, [r7, #4]
- 8003db4:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
- 8003db8:	681a      	ldr	r2, [r3, #0]
- 8003dba:	78fb      	ldrb	r3, [r7, #3]
- 8003dbc:	6393      	str	r3, [r2, #56]	; 0x38
+ 8003db8:	687b      	ldr	r3, [r7, #4]
+ 8003dba:	f893 308c 	ldrb.w	r3, [r3, #140]	; 0x8c
+ 8003dbe:	2b04      	cmp	r3, #4
+ 8003dc0:	d106      	bne.n	8003dd0 <lcdControllerSetBacklight+0x3c>
+ 8003dc2:	687b      	ldr	r3, [r7, #4]
+ 8003dc4:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
+ 8003dc8:	681a      	ldr	r2, [r3, #0]
+ 8003dca:	78fb      	ldrb	r3, [r7, #3]
+ 8003dcc:	6393      	str	r3, [r2, #56]	; 0x38
 }
- 8003dbe:	e011      	b.n	8003de4 <lcdControllerSetBacklight+0x60>
+ 8003dce:	e011      	b.n	8003df4 <lcdControllerSetBacklight+0x60>
 	__HAL_TIM_SET_COMPARE(lcdController->backlightPwmTimer, lcdController->backlightPwmChannel, backlightPercent);
- 8003dc0:	687b      	ldr	r3, [r7, #4]
- 8003dc2:	f893 308c 	ldrb.w	r3, [r3, #140]	; 0x8c
- 8003dc6:	2b08      	cmp	r3, #8
- 8003dc8:	d106      	bne.n	8003dd8 <lcdControllerSetBacklight+0x54>
- 8003dca:	687b      	ldr	r3, [r7, #4]
- 8003dcc:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
- 8003dd0:	681a      	ldr	r2, [r3, #0]
- 8003dd2:	78fb      	ldrb	r3, [r7, #3]
- 8003dd4:	63d3      	str	r3, [r2, #60]	; 0x3c
+ 8003dd0:	687b      	ldr	r3, [r7, #4]
+ 8003dd2:	f893 308c 	ldrb.w	r3, [r3, #140]	; 0x8c
+ 8003dd6:	2b08      	cmp	r3, #8
+ 8003dd8:	d106      	bne.n	8003de8 <lcdControllerSetBacklight+0x54>
+ 8003dda:	687b      	ldr	r3, [r7, #4]
+ 8003ddc:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
+ 8003de0:	681a      	ldr	r2, [r3, #0]
+ 8003de2:	78fb      	ldrb	r3, [r7, #3]
+ 8003de4:	63d3      	str	r3, [r2, #60]	; 0x3c
 }
- 8003dd6:	e005      	b.n	8003de4 <lcdControllerSetBacklight+0x60>
+ 8003de6:	e005      	b.n	8003df4 <lcdControllerSetBacklight+0x60>
 	__HAL_TIM_SET_COMPARE(lcdController->backlightPwmTimer, lcdController->backlightPwmChannel, backlightPercent);
- 8003dd8:	687b      	ldr	r3, [r7, #4]
- 8003dda:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
- 8003dde:	681a      	ldr	r2, [r3, #0]
- 8003de0:	78fb      	ldrb	r3, [r7, #3]
- 8003de2:	6413      	str	r3, [r2, #64]	; 0x40
+ 8003de8:	687b      	ldr	r3, [r7, #4]
+ 8003dea:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
+ 8003dee:	681a      	ldr	r2, [r3, #0]
+ 8003df0:	78fb      	ldrb	r3, [r7, #3]
+ 8003df2:	6413      	str	r3, [r2, #64]	; 0x40
 }
- 8003de4:	bf00      	nop
- 8003de6:	370c      	adds	r7, #12
- 8003de8:	46bd      	mov	sp, r7
- 8003dea:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003dee:	4770      	bx	lr
+ 8003df4:	bf00      	nop
+ 8003df6:	370c      	adds	r7, #12
+ 8003df8:	46bd      	mov	sp, r7
+ 8003dfa:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003dfe:	4770      	bx	lr
 
-08003df0 <lcdControllerOnOff>:
+08003e00 <lcdControllerOnOff>:
 
 void lcdControllerOnOff(LcdController *lcdController, LcdOnOff lcdOnOff)
 {
- 8003df0:	b580      	push	{r7, lr}
- 8003df2:	b082      	sub	sp, #8
- 8003df4:	af00      	add	r7, sp, #0
- 8003df6:	6078      	str	r0, [r7, #4]
- 8003df8:	460b      	mov	r3, r1
- 8003dfa:	70fb      	strb	r3, [r7, #3]
+ 8003e00:	b580      	push	{r7, lr}
+ 8003e02:	b082      	sub	sp, #8
+ 8003e04:	af00      	add	r7, sp, #0
+ 8003e06:	6078      	str	r0, [r7, #4]
+ 8003e08:	460b      	mov	r3, r1
+ 8003e0a:	70fb      	strb	r3, [r7, #3]
 	HAL_GPIO_WritePin(lcdController->onOffPort, lcdController->onOffPin, lcdOnOff);
- 8003dfc:	687b      	ldr	r3, [r7, #4]
- 8003dfe:	f8d3 00e4 	ldr.w	r0, [r3, #228]	; 0xe4
- 8003e02:	687b      	ldr	r3, [r7, #4]
- 8003e04:	f8b3 30e8 	ldrh.w	r3, [r3, #232]	; 0xe8
- 8003e08:	78fa      	ldrb	r2, [r7, #3]
- 8003e0a:	4619      	mov	r1, r3
- 8003e0c:	f7fd fb18 	bl	8001440 <HAL_GPIO_WritePin>
+ 8003e0c:	687b      	ldr	r3, [r7, #4]
+ 8003e0e:	f8d3 00e4 	ldr.w	r0, [r3, #228]	; 0xe4
+ 8003e12:	687b      	ldr	r3, [r7, #4]
+ 8003e14:	f8b3 30e8 	ldrh.w	r3, [r3, #232]	; 0xe8
+ 8003e18:	78fa      	ldrb	r2, [r7, #3]
+ 8003e1a:	4619      	mov	r1, r3
+ 8003e1c:	f7fd fb10 	bl	8001440 <HAL_GPIO_WritePin>
 }
- 8003e10:	bf00      	nop
- 8003e12:	3708      	adds	r7, #8
- 8003e14:	46bd      	mov	sp, r7
- 8003e16:	bd80      	pop	{r7, pc}
+ 8003e20:	bf00      	nop
+ 8003e22:	3708      	adds	r7, #8
+ 8003e24:	46bd      	mov	sp, r7
+ 8003e26:	bd80      	pop	{r7, pc}
 
-08003e18 <lcdControllerGetDelayStatus>:
+08003e28 <lcdControllerGetDelayStatus>:
 	lcdControllerSetString(lcdController, ROW_2, (uint8_t *) "                ");
 	lcdControllerSetString(lcdController, ROW_3, (uint8_t *) "                ");
 }
 
 Bool lcdControllerGetDelayStatus(LcdController *lcdController)
 {
- 8003e18:	b480      	push	{r7}
- 8003e1a:	b083      	sub	sp, #12
- 8003e1c:	af00      	add	r7, sp, #0
- 8003e1e:	6078      	str	r0, [r7, #4]
+ 8003e28:	b480      	push	{r7}
+ 8003e2a:	b083      	sub	sp, #12
+ 8003e2c:	af00      	add	r7, sp, #0
+ 8003e2e:	6078      	str	r0, [r7, #4]
 	return lcdController->countDelay;
- 8003e20:	687b      	ldr	r3, [r7, #4]
- 8003e22:	f893 30a8 	ldrb.w	r3, [r3, #168]	; 0xa8
+ 8003e30:	687b      	ldr	r3, [r7, #4]
+ 8003e32:	f893 30a8 	ldrb.w	r3, [r3, #168]	; 0xa8
 }
- 8003e26:	4618      	mov	r0, r3
- 8003e28:	370c      	adds	r7, #12
- 8003e2a:	46bd      	mov	sp, r7
- 8003e2c:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003e30:	4770      	bx	lr
+ 8003e36:	4618      	mov	r0, r3
+ 8003e38:	370c      	adds	r7, #12
+ 8003e3a:	46bd      	mov	sp, r7
+ 8003e3c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003e40:	4770      	bx	lr
 
-08003e32 <lcdControllerIncrementDelayCounter>:
+08003e42 <lcdControllerIncrementDelayCounter>:
 
 void lcdControllerIncrementDelayCounter(LcdController *lcdController)
 {
- 8003e32:	b480      	push	{r7}
- 8003e34:	b083      	sub	sp, #12
- 8003e36:	af00      	add	r7, sp, #0
- 8003e38:	6078      	str	r0, [r7, #4]
+ 8003e42:	b480      	push	{r7}
+ 8003e44:	b083      	sub	sp, #12
+ 8003e46:	af00      	add	r7, sp, #0
+ 8003e48:	6078      	str	r0, [r7, #4]
 	lcdController->delayCounter++;
- 8003e3a:	687b      	ldr	r3, [r7, #4]
- 8003e3c:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
- 8003e40:	1c5a      	adds	r2, r3, #1
- 8003e42:	687b      	ldr	r3, [r7, #4]
- 8003e44:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
+ 8003e4a:	687b      	ldr	r3, [r7, #4]
+ 8003e4c:	f8d3 309c 	ldr.w	r3, [r3, #156]	; 0x9c
+ 8003e50:	1c5a      	adds	r2, r3, #1
+ 8003e52:	687b      	ldr	r3, [r7, #4]
+ 8003e54:	f8c3 209c 	str.w	r2, [r3, #156]	; 0x9c
 }
- 8003e48:	bf00      	nop
- 8003e4a:	370c      	adds	r7, #12
- 8003e4c:	46bd      	mov	sp, r7
- 8003e4e:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003e52:	4770      	bx	lr
+ 8003e58:	bf00      	nop
+ 8003e5a:	370c      	adds	r7, #12
+ 8003e5c:	46bd      	mov	sp, r7
+ 8003e5e:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003e62:	4770      	bx	lr
 
-08003e54 <lcdControllerGetEnableDelayStatus>:
+08003e64 <lcdControllerGetEnableDelayStatus>:
 
 Bool lcdControllerGetEnableDelayStatus(LcdController *lcdController)
 {
- 8003e54:	b480      	push	{r7}
- 8003e56:	b083      	sub	sp, #12
- 8003e58:	af00      	add	r7, sp, #0
- 8003e5a:	6078      	str	r0, [r7, #4]
+ 8003e64:	b480      	push	{r7}
+ 8003e66:	b083      	sub	sp, #12
+ 8003e68:	af00      	add	r7, sp, #0
+ 8003e6a:	6078      	str	r0, [r7, #4]
 	return lcdController->countEnableDelay;
- 8003e5c:	687b      	ldr	r3, [r7, #4]
- 8003e5e:	f893 30a9 	ldrb.w	r3, [r3, #169]	; 0xa9
+ 8003e6c:	687b      	ldr	r3, [r7, #4]
+ 8003e6e:	f893 30a9 	ldrb.w	r3, [r3, #169]	; 0xa9
 }
- 8003e62:	4618      	mov	r0, r3
- 8003e64:	370c      	adds	r7, #12
- 8003e66:	46bd      	mov	sp, r7
- 8003e68:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003e6c:	4770      	bx	lr
+ 8003e72:	4618      	mov	r0, r3
+ 8003e74:	370c      	adds	r7, #12
+ 8003e76:	46bd      	mov	sp, r7
+ 8003e78:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003e7c:	4770      	bx	lr
 
-08003e6e <lcdControllerIncrementEnableDelayCounter>:
+08003e7e <lcdControllerIncrementEnableDelayCounter>:
 
 void lcdControllerIncrementEnableDelayCounter(LcdController *lcdController)
 {
- 8003e6e:	b480      	push	{r7}
- 8003e70:	b083      	sub	sp, #12
- 8003e72:	af00      	add	r7, sp, #0
- 8003e74:	6078      	str	r0, [r7, #4]
+ 8003e7e:	b480      	push	{r7}
+ 8003e80:	b083      	sub	sp, #12
+ 8003e82:	af00      	add	r7, sp, #0
+ 8003e84:	6078      	str	r0, [r7, #4]
 	lcdController->delayCounterEnable++;
- 8003e76:	687b      	ldr	r3, [r7, #4]
- 8003e78:	f8d3 30a0 	ldr.w	r3, [r3, #160]	; 0xa0
- 8003e7c:	1c5a      	adds	r2, r3, #1
- 8003e7e:	687b      	ldr	r3, [r7, #4]
- 8003e80:	f8c3 20a0 	str.w	r2, [r3, #160]	; 0xa0
+ 8003e86:	687b      	ldr	r3, [r7, #4]
+ 8003e88:	f8d3 30a0 	ldr.w	r3, [r3, #160]	; 0xa0
+ 8003e8c:	1c5a      	adds	r2, r3, #1
+ 8003e8e:	687b      	ldr	r3, [r7, #4]
+ 8003e90:	f8c3 20a0 	str.w	r2, [r3, #160]	; 0xa0
 }
- 8003e84:	bf00      	nop
- 8003e86:	370c      	adds	r7, #12
- 8003e88:	46bd      	mov	sp, r7
- 8003e8a:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003e8e:	4770      	bx	lr
+ 8003e94:	bf00      	nop
+ 8003e96:	370c      	adds	r7, #12
+ 8003e98:	46bd      	mov	sp, r7
+ 8003e9a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003e9e:	4770      	bx	lr
 
-08003e90 <lcdControllerIsInitialized>:
+08003ea0 <lcdControllerIsInitialized>:
 
 Bool lcdControllerIsInitialized(LcdController *lcdController)
 {
- 8003e90:	b480      	push	{r7}
- 8003e92:	b083      	sub	sp, #12
- 8003e94:	af00      	add	r7, sp, #0
- 8003e96:	6078      	str	r0, [r7, #4]
+ 8003ea0:	b480      	push	{r7}
+ 8003ea2:	b083      	sub	sp, #12
+ 8003ea4:	af00      	add	r7, sp, #0
+ 8003ea6:	6078      	str	r0, [r7, #4]
 	return lcdController->initialized;
- 8003e98:	687b      	ldr	r3, [r7, #4]
- 8003e9a:	f893 308f 	ldrb.w	r3, [r3, #143]	; 0x8f
+ 8003ea8:	687b      	ldr	r3, [r7, #4]
+ 8003eaa:	f893 308f 	ldrb.w	r3, [r3, #143]	; 0x8f
 }
- 8003e9e:	4618      	mov	r0, r3
- 8003ea0:	370c      	adds	r7, #12
- 8003ea2:	46bd      	mov	sp, r7
- 8003ea4:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003ea8:	4770      	bx	lr
+ 8003eae:	4618      	mov	r0, r3
+ 8003eb0:	370c      	adds	r7, #12
+ 8003eb2:	46bd      	mov	sp, r7
+ 8003eb4:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003eb8:	4770      	bx	lr
 
-08003eaa <pushButtonInit>:
+08003eba <pushButtonInit>:
  */
 
 #include "pushButton.h"
 
 void pushButtonInit(PushButton *pushButton, GPIO_TypeDef *pushButtonPort, uint16_t pushButtonPin, UnpressedState unpressedState, uint16_t debounceTimeSinglePressCounter, uint16_t debounceTimeContinuousPressCounter)
 {
- 8003eaa:	b480      	push	{r7}
- 8003eac:	b085      	sub	sp, #20
- 8003eae:	af00      	add	r7, sp, #0
- 8003eb0:	60f8      	str	r0, [r7, #12]
- 8003eb2:	60b9      	str	r1, [r7, #8]
- 8003eb4:	4611      	mov	r1, r2
- 8003eb6:	461a      	mov	r2, r3
- 8003eb8:	460b      	mov	r3, r1
- 8003eba:	80fb      	strh	r3, [r7, #6]
- 8003ebc:	4613      	mov	r3, r2
- 8003ebe:	717b      	strb	r3, [r7, #5]
+ 8003eba:	b480      	push	{r7}
+ 8003ebc:	b085      	sub	sp, #20
+ 8003ebe:	af00      	add	r7, sp, #0
+ 8003ec0:	60f8      	str	r0, [r7, #12]
+ 8003ec2:	60b9      	str	r1, [r7, #8]
+ 8003ec4:	4611      	mov	r1, r2
+ 8003ec6:	461a      	mov	r2, r3
+ 8003ec8:	460b      	mov	r3, r1
+ 8003eca:	80fb      	strh	r3, [r7, #6]
+ 8003ecc:	4613      	mov	r3, r2
+ 8003ece:	717b      	strb	r3, [r7, #5]
 	pushButton->port = pushButtonPort;
- 8003ec0:	68fb      	ldr	r3, [r7, #12]
- 8003ec2:	68ba      	ldr	r2, [r7, #8]
- 8003ec4:	601a      	str	r2, [r3, #0]
+ 8003ed0:	68fb      	ldr	r3, [r7, #12]
+ 8003ed2:	68ba      	ldr	r2, [r7, #8]
+ 8003ed4:	601a      	str	r2, [r3, #0]
 	pushButton->pin = pushButtonPin;
- 8003ec6:	68fb      	ldr	r3, [r7, #12]
- 8003ec8:	88fa      	ldrh	r2, [r7, #6]
- 8003eca:	809a      	strh	r2, [r3, #4]
+ 8003ed6:	68fb      	ldr	r3, [r7, #12]
+ 8003ed8:	88fa      	ldrh	r2, [r7, #6]
+ 8003eda:	809a      	strh	r2, [r3, #4]
 	pushButton->unpressedState = unpressedState;
- 8003ecc:	68fb      	ldr	r3, [r7, #12]
- 8003ece:	797a      	ldrb	r2, [r7, #5]
- 8003ed0:	719a      	strb	r2, [r3, #6]
+ 8003edc:	68fb      	ldr	r3, [r7, #12]
+ 8003ede:	797a      	ldrb	r2, [r7, #5]
+ 8003ee0:	719a      	strb	r2, [r3, #6]
 	pushButton->pressState = UNPRESSED;
- 8003ed2:	68fb      	ldr	r3, [r7, #12]
- 8003ed4:	2200      	movs	r2, #0
- 8003ed6:	71da      	strb	r2, [r3, #7]
+ 8003ee2:	68fb      	ldr	r3, [r7, #12]
+ 8003ee4:	2200      	movs	r2, #0
+ 8003ee6:	71da      	strb	r2, [r3, #7]
 	pushButton->timeSinglePressCounter = 0;
- 8003ed8:	68fb      	ldr	r3, [r7, #12]
- 8003eda:	2200      	movs	r2, #0
- 8003edc:	811a      	strh	r2, [r3, #8]
+ 8003ee8:	68fb      	ldr	r3, [r7, #12]
+ 8003eea:	2200      	movs	r2, #0
+ 8003eec:	811a      	strh	r2, [r3, #8]
 	pushButton->timeContinuousPressCounter = 0;
- 8003ede:	68fb      	ldr	r3, [r7, #12]
- 8003ee0:	2200      	movs	r2, #0
- 8003ee2:	815a      	strh	r2, [r3, #10]
+ 8003eee:	68fb      	ldr	r3, [r7, #12]
+ 8003ef0:	2200      	movs	r2, #0
+ 8003ef2:	815a      	strh	r2, [r3, #10]
 	pushButton->continuousPressedCounter = 0;
- 8003ee4:	68fb      	ldr	r3, [r7, #12]
- 8003ee6:	2200      	movs	r2, #0
- 8003ee8:	821a      	strh	r2, [r3, #16]
+ 8003ef4:	68fb      	ldr	r3, [r7, #12]
+ 8003ef6:	2200      	movs	r2, #0
+ 8003ef8:	821a      	strh	r2, [r3, #16]
 	pushButton->debounceTimeSinglePressCounter = debounceTimeSinglePressCounter;
- 8003eea:	68fb      	ldr	r3, [r7, #12]
- 8003eec:	8b3a      	ldrh	r2, [r7, #24]
- 8003eee:	819a      	strh	r2, [r3, #12]
+ 8003efa:	68fb      	ldr	r3, [r7, #12]
+ 8003efc:	8b3a      	ldrh	r2, [r7, #24]
+ 8003efe:	819a      	strh	r2, [r3, #12]
 	pushButton->debounceTimeContinuousPressCounter = debounceTimeContinuousPressCounter;
- 8003ef0:	68fb      	ldr	r3, [r7, #12]
- 8003ef2:	8bba      	ldrh	r2, [r7, #28]
- 8003ef4:	81da      	strh	r2, [r3, #14]
+ 8003f00:	68fb      	ldr	r3, [r7, #12]
+ 8003f02:	8bba      	ldrh	r2, [r7, #28]
+ 8003f04:	81da      	strh	r2, [r3, #14]
 
 	if(pushButton->debounceTimeSinglePressCounter < MIN_PRESSED_COUNTER)
 	{
 		pushButton->debounceTimeSinglePressCounter = MIN_PRESSED_COUNTER;
 	}
 	else if(pushButton->debounceTimeSinglePressCounter > MAX_PRESSED_COUNTER)
- 8003ef6:	68fb      	ldr	r3, [r7, #12]
- 8003ef8:	899b      	ldrh	r3, [r3, #12]
- 8003efa:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8003efe:	4293      	cmp	r3, r2
- 8003f00:	d903      	bls.n	8003f0a <pushButtonInit+0x60>
+ 8003f06:	68fb      	ldr	r3, [r7, #12]
+ 8003f08:	899b      	ldrh	r3, [r3, #12]
+ 8003f0a:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8003f0e:	4293      	cmp	r3, r2
+ 8003f10:	d903      	bls.n	8003f1a <pushButtonInit+0x60>
 	{
 		pushButton->debounceTimeSinglePressCounter = MAX_PRESSED_COUNTER;
- 8003f02:	68fb      	ldr	r3, [r7, #12]
- 8003f04:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8003f08:	819a      	strh	r2, [r3, #12]
+ 8003f12:	68fb      	ldr	r3, [r7, #12]
+ 8003f14:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8003f18:	819a      	strh	r2, [r3, #12]
 
 	if(pushButton->debounceTimeContinuousPressCounter < MIN_PRESSED_COUNTER)
 	{
 		pushButton->debounceTimeContinuousPressCounter = MIN_PRESSED_COUNTER;
 	}
 	else if(pushButton->debounceTimeContinuousPressCounter > MAX_PRESSED_COUNTER)
- 8003f0a:	68fb      	ldr	r3, [r7, #12]
- 8003f0c:	89db      	ldrh	r3, [r3, #14]
- 8003f0e:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8003f12:	4293      	cmp	r3, r2
- 8003f14:	d903      	bls.n	8003f1e <pushButtonInit+0x74>
+ 8003f1a:	68fb      	ldr	r3, [r7, #12]
+ 8003f1c:	89db      	ldrh	r3, [r3, #14]
+ 8003f1e:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8003f22:	4293      	cmp	r3, r2
+ 8003f24:	d903      	bls.n	8003f2e <pushButtonInit+0x74>
 	{
 		pushButton->debounceTimeContinuousPressCounter = MAX_PRESSED_COUNTER;
- 8003f16:	68fb      	ldr	r3, [r7, #12]
- 8003f18:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8003f1c:	81da      	strh	r2, [r3, #14]
+ 8003f26:	68fb      	ldr	r3, [r7, #12]
+ 8003f28:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8003f2c:	81da      	strh	r2, [r3, #14]
 	}
 }
- 8003f1e:	bf00      	nop
- 8003f20:	3714      	adds	r7, #20
- 8003f22:	46bd      	mov	sp, r7
- 8003f24:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8003f28:	4770      	bx	lr
+ 8003f2e:	bf00      	nop
+ 8003f30:	3714      	adds	r7, #20
+ 8003f32:	46bd      	mov	sp, r7
+ 8003f34:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8003f38:	4770      	bx	lr
 
-08003f2a <pushButtonReadSinglePressInRelease>:
+08003f3a <pushButtonReadSinglePressInRelease>:
 
 PressState pushButtonReadSinglePressInRelease(PushButton *pushButton)
 {
- 8003f2a:	b580      	push	{r7, lr}
- 8003f2c:	b084      	sub	sp, #16
- 8003f2e:	af00      	add	r7, sp, #0
- 8003f30:	6078      	str	r0, [r7, #4]
+ 8003f3a:	b580      	push	{r7, lr}
+ 8003f3c:	b084      	sub	sp, #16
+ 8003f3e:	af00      	add	r7, sp, #0
+ 8003f40:	6078      	str	r0, [r7, #4]
 	GPIO_PinState currentPushButtonPinState = HAL_GPIO_ReadPin(pushButton->port, pushButton->pin);
- 8003f32:	687b      	ldr	r3, [r7, #4]
- 8003f34:	681a      	ldr	r2, [r3, #0]
- 8003f36:	687b      	ldr	r3, [r7, #4]
- 8003f38:	889b      	ldrh	r3, [r3, #4]
- 8003f3a:	4619      	mov	r1, r3
- 8003f3c:	4610      	mov	r0, r2
- 8003f3e:	f7fd fa67 	bl	8001410 <HAL_GPIO_ReadPin>
- 8003f42:	4603      	mov	r3, r0
- 8003f44:	73fb      	strb	r3, [r7, #15]
+ 8003f42:	687b      	ldr	r3, [r7, #4]
+ 8003f44:	681a      	ldr	r2, [r3, #0]
+ 8003f46:	687b      	ldr	r3, [r7, #4]
+ 8003f48:	889b      	ldrh	r3, [r3, #4]
+ 8003f4a:	4619      	mov	r1, r3
+ 8003f4c:	4610      	mov	r0, r2
+ 8003f4e:	f7fd fa5f 	bl	8001410 <HAL_GPIO_ReadPin>
+ 8003f52:	4603      	mov	r3, r0
+ 8003f54:	73fb      	strb	r3, [r7, #15]
 
 	if((uint8_t) currentPushButtonPinState == (uint8_t) pushButton->unpressedState)
- 8003f46:	687b      	ldr	r3, [r7, #4]
- 8003f48:	799b      	ldrb	r3, [r3, #6]
- 8003f4a:	7bfa      	ldrb	r2, [r7, #15]
- 8003f4c:	429a      	cmp	r2, r3
- 8003f4e:	d115      	bne.n	8003f7c <pushButtonReadSinglePressInRelease+0x52>
+ 8003f56:	687b      	ldr	r3, [r7, #4]
+ 8003f58:	799b      	ldrb	r3, [r3, #6]
+ 8003f5a:	7bfa      	ldrb	r2, [r7, #15]
+ 8003f5c:	429a      	cmp	r2, r3
+ 8003f5e:	d115      	bne.n	8003f8c <pushButtonReadSinglePressInRelease+0x52>
 	{
 		if(pushButton->timeSinglePressCounter >= pushButton->debounceTimeSinglePressCounter)
- 8003f50:	687b      	ldr	r3, [r7, #4]
- 8003f52:	891a      	ldrh	r2, [r3, #8]
- 8003f54:	687b      	ldr	r3, [r7, #4]
- 8003f56:	899b      	ldrh	r3, [r3, #12]
- 8003f58:	429a      	cmp	r2, r3
- 8003f5a:	d307      	bcc.n	8003f6c <pushButtonReadSinglePressInRelease+0x42>
+ 8003f60:	687b      	ldr	r3, [r7, #4]
+ 8003f62:	891a      	ldrh	r2, [r3, #8]
+ 8003f64:	687b      	ldr	r3, [r7, #4]
+ 8003f66:	899b      	ldrh	r3, [r3, #12]
+ 8003f68:	429a      	cmp	r2, r3
+ 8003f6a:	d307      	bcc.n	8003f7c <pushButtonReadSinglePressInRelease+0x42>
 		{
 			pushButton->timeSinglePressCounter = MIN_PRESSED_COUNTER;
- 8003f5c:	687b      	ldr	r3, [r7, #4]
- 8003f5e:	2200      	movs	r2, #0
- 8003f60:	811a      	strh	r2, [r3, #8]
-			pushButton->pressState = PRESSED;
- 8003f62:	687b      	ldr	r3, [r7, #4]
- 8003f64:	2201      	movs	r2, #1
- 8003f66:	71da      	strb	r2, [r3, #7]
-			return PRESSED;
- 8003f68:	2301      	movs	r3, #1
- 8003f6a:	e01b      	b.n	8003fa4 <pushButtonReadSinglePressInRelease+0x7a>
-		}
-
-		pushButton->timeSinglePressCounter = MIN_PRESSED_COUNTER;
  8003f6c:	687b      	ldr	r3, [r7, #4]
  8003f6e:	2200      	movs	r2, #0
  8003f70:	811a      	strh	r2, [r3, #8]
-		pushButton->pressState = UNPRESSED;
+			pushButton->pressState = PRESSED;
  8003f72:	687b      	ldr	r3, [r7, #4]
- 8003f74:	2200      	movs	r2, #0
+ 8003f74:	2201      	movs	r2, #1
  8003f76:	71da      	strb	r2, [r3, #7]
+			return PRESSED;
+ 8003f78:	2301      	movs	r3, #1
+ 8003f7a:	e01b      	b.n	8003fb4 <pushButtonReadSinglePressInRelease+0x7a>
+		}
+
+		pushButton->timeSinglePressCounter = MIN_PRESSED_COUNTER;
+ 8003f7c:	687b      	ldr	r3, [r7, #4]
+ 8003f7e:	2200      	movs	r2, #0
+ 8003f80:	811a      	strh	r2, [r3, #8]
+		pushButton->pressState = UNPRESSED;
+ 8003f82:	687b      	ldr	r3, [r7, #4]
+ 8003f84:	2200      	movs	r2, #0
+ 8003f86:	71da      	strb	r2, [r3, #7]
 		return UNPRESSED;
- 8003f78:	2300      	movs	r3, #0
- 8003f7a:	e013      	b.n	8003fa4 <pushButtonReadSinglePressInRelease+0x7a>
+ 8003f88:	2300      	movs	r3, #0
+ 8003f8a:	e013      	b.n	8003fb4 <pushButtonReadSinglePressInRelease+0x7a>
 	}
 
 	pushButton->timeSinglePressCounter += 1;
- 8003f7c:	687b      	ldr	r3, [r7, #4]
- 8003f7e:	891b      	ldrh	r3, [r3, #8]
- 8003f80:	3301      	adds	r3, #1
- 8003f82:	b29a      	uxth	r2, r3
- 8003f84:	687b      	ldr	r3, [r7, #4]
- 8003f86:	811a      	strh	r2, [r3, #8]
+ 8003f8c:	687b      	ldr	r3, [r7, #4]
+ 8003f8e:	891b      	ldrh	r3, [r3, #8]
+ 8003f90:	3301      	adds	r3, #1
+ 8003f92:	b29a      	uxth	r2, r3
+ 8003f94:	687b      	ldr	r3, [r7, #4]
+ 8003f96:	811a      	strh	r2, [r3, #8]
 	if(pushButton->timeSinglePressCounter < MIN_PRESSED_COUNTER)
 	{
 		pushButton->timeSinglePressCounter = MIN_PRESSED_COUNTER;
 	}
 	else if(pushButton->timeSinglePressCounter > MAX_PRESSED_COUNTER)
- 8003f88:	687b      	ldr	r3, [r7, #4]
- 8003f8a:	891b      	ldrh	r3, [r3, #8]
- 8003f8c:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8003f90:	4293      	cmp	r3, r2
- 8003f92:	d903      	bls.n	8003f9c <pushButtonReadSinglePressInRelease+0x72>
+ 8003f98:	687b      	ldr	r3, [r7, #4]
+ 8003f9a:	891b      	ldrh	r3, [r3, #8]
+ 8003f9c:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8003fa0:	4293      	cmp	r3, r2
+ 8003fa2:	d903      	bls.n	8003fac <pushButtonReadSinglePressInRelease+0x72>
 	{
 		pushButton->timeSinglePressCounter = MAX_PRESSED_COUNTER;
- 8003f94:	687b      	ldr	r3, [r7, #4]
- 8003f96:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8003f9a:	811a      	strh	r2, [r3, #8]
+ 8003fa4:	687b      	ldr	r3, [r7, #4]
+ 8003fa6:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8003faa:	811a      	strh	r2, [r3, #8]
 	}
 
 	pushButton->pressState = UNPRESSED;
- 8003f9c:	687b      	ldr	r3, [r7, #4]
- 8003f9e:	2200      	movs	r2, #0
- 8003fa0:	71da      	strb	r2, [r3, #7]
+ 8003fac:	687b      	ldr	r3, [r7, #4]
+ 8003fae:	2200      	movs	r2, #0
+ 8003fb0:	71da      	strb	r2, [r3, #7]
 	return UNPRESSED;
- 8003fa2:	2300      	movs	r3, #0
+ 8003fb2:	2300      	movs	r3, #0
 }
- 8003fa4:	4618      	mov	r0, r3
- 8003fa6:	3710      	adds	r7, #16
- 8003fa8:	46bd      	mov	sp, r7
- 8003faa:	bd80      	pop	{r7, pc}
+ 8003fb4:	4618      	mov	r0, r3
+ 8003fb6:	3710      	adds	r7, #16
+ 8003fb8:	46bd      	mov	sp, r7
+ 8003fba:	bd80      	pop	{r7, pc}
 
-08003fac <pushButtonReadContinuousPress>:
+08003fbc <pushButtonReadContinuousPress>:
 
 PressState pushButtonReadContinuousPress(PushButton *pushButton)
 {
- 8003fac:	b580      	push	{r7, lr}
- 8003fae:	b084      	sub	sp, #16
- 8003fb0:	af00      	add	r7, sp, #0
- 8003fb2:	6078      	str	r0, [r7, #4]
+ 8003fbc:	b580      	push	{r7, lr}
+ 8003fbe:	b084      	sub	sp, #16
+ 8003fc0:	af00      	add	r7, sp, #0
+ 8003fc2:	6078      	str	r0, [r7, #4]
 	GPIO_PinState currentPushButtonPinState = HAL_GPIO_ReadPin(pushButton->port, pushButton->pin);
- 8003fb4:	687b      	ldr	r3, [r7, #4]
- 8003fb6:	681a      	ldr	r2, [r3, #0]
- 8003fb8:	687b      	ldr	r3, [r7, #4]
- 8003fba:	889b      	ldrh	r3, [r3, #4]
- 8003fbc:	4619      	mov	r1, r3
- 8003fbe:	4610      	mov	r0, r2
- 8003fc0:	f7fd fa26 	bl	8001410 <HAL_GPIO_ReadPin>
- 8003fc4:	4603      	mov	r3, r0
- 8003fc6:	73fb      	strb	r3, [r7, #15]
+ 8003fc4:	687b      	ldr	r3, [r7, #4]
+ 8003fc6:	681a      	ldr	r2, [r3, #0]
+ 8003fc8:	687b      	ldr	r3, [r7, #4]
+ 8003fca:	889b      	ldrh	r3, [r3, #4]
+ 8003fcc:	4619      	mov	r1, r3
+ 8003fce:	4610      	mov	r0, r2
+ 8003fd0:	f7fd fa1e 	bl	8001410 <HAL_GPIO_ReadPin>
+ 8003fd4:	4603      	mov	r3, r0
+ 8003fd6:	73fb      	strb	r3, [r7, #15]
 
 	if((uint8_t) currentPushButtonPinState == (uint8_t) pushButton->unpressedState)
- 8003fc8:	687b      	ldr	r3, [r7, #4]
- 8003fca:	799b      	ldrb	r3, [r3, #6]
- 8003fcc:	7bfa      	ldrb	r2, [r7, #15]
- 8003fce:	429a      	cmp	r2, r3
- 8003fd0:	d10a      	bne.n	8003fe8 <pushButtonReadContinuousPress+0x3c>
+ 8003fd8:	687b      	ldr	r3, [r7, #4]
+ 8003fda:	799b      	ldrb	r3, [r3, #6]
+ 8003fdc:	7bfa      	ldrb	r2, [r7, #15]
+ 8003fde:	429a      	cmp	r2, r3
+ 8003fe0:	d10a      	bne.n	8003ff8 <pushButtonReadContinuousPress+0x3c>
 	{
 		pushButton->continuousPressedCounter = 0;
- 8003fd2:	687b      	ldr	r3, [r7, #4]
- 8003fd4:	2200      	movs	r2, #0
- 8003fd6:	821a      	strh	r2, [r3, #16]
+ 8003fe2:	687b      	ldr	r3, [r7, #4]
+ 8003fe4:	2200      	movs	r2, #0
+ 8003fe6:	821a      	strh	r2, [r3, #16]
 		pushButton->timeContinuousPressCounter = MIN_PRESSED_COUNTER;
- 8003fd8:	687b      	ldr	r3, [r7, #4]
- 8003fda:	2200      	movs	r2, #0
- 8003fdc:	815a      	strh	r2, [r3, #10]
+ 8003fe8:	687b      	ldr	r3, [r7, #4]
+ 8003fea:	2200      	movs	r2, #0
+ 8003fec:	815a      	strh	r2, [r3, #10]
 		pushButton->pressState = UNPRESSED;
- 8003fde:	687b      	ldr	r3, [r7, #4]
- 8003fe0:	2200      	movs	r2, #0
- 8003fe2:	71da      	strb	r2, [r3, #7]
+ 8003fee:	687b      	ldr	r3, [r7, #4]
+ 8003ff0:	2200      	movs	r2, #0
+ 8003ff2:	71da      	strb	r2, [r3, #7]
 		return UNPRESSED;
- 8003fe4:	2300      	movs	r3, #0
- 8003fe6:	e041      	b.n	800406c <pushButtonReadContinuousPress+0xc0>
+ 8003ff4:	2300      	movs	r3, #0
+ 8003ff6:	e041      	b.n	800407c <pushButtonReadContinuousPress+0xc0>
 	}
 
 	if(pushButton->continuousPressedCounter >= 20)
- 8003fe8:	687b      	ldr	r3, [r7, #4]
- 8003fea:	8a1b      	ldrh	r3, [r3, #16]
- 8003fec:	2b13      	cmp	r3, #19
- 8003fee:	d906      	bls.n	8003ffe <pushButtonReadContinuousPress+0x52>
+ 8003ff8:	687b      	ldr	r3, [r7, #4]
+ 8003ffa:	8a1b      	ldrh	r3, [r3, #16]
+ 8003ffc:	2b13      	cmp	r3, #19
+ 8003ffe:	d906      	bls.n	800400e <pushButtonReadContinuousPress+0x52>
 	{
 		pushButton->timeContinuousPressCounter += 4;
- 8003ff0:	687b      	ldr	r3, [r7, #4]
- 8003ff2:	895b      	ldrh	r3, [r3, #10]
- 8003ff4:	3304      	adds	r3, #4
- 8003ff6:	b29a      	uxth	r2, r3
- 8003ff8:	687b      	ldr	r3, [r7, #4]
- 8003ffa:	815a      	strh	r2, [r3, #10]
- 8003ffc:	e010      	b.n	8004020 <pushButtonReadContinuousPress+0x74>
+ 8004000:	687b      	ldr	r3, [r7, #4]
+ 8004002:	895b      	ldrh	r3, [r3, #10]
+ 8004004:	3304      	adds	r3, #4
+ 8004006:	b29a      	uxth	r2, r3
+ 8004008:	687b      	ldr	r3, [r7, #4]
+ 800400a:	815a      	strh	r2, [r3, #10]
+ 800400c:	e010      	b.n	8004030 <pushButtonReadContinuousPress+0x74>
 	}
 	else if(pushButton->continuousPressedCounter >= 10)
- 8003ffe:	687b      	ldr	r3, [r7, #4]
- 8004000:	8a1b      	ldrh	r3, [r3, #16]
- 8004002:	2b09      	cmp	r3, #9
- 8004004:	d906      	bls.n	8004014 <pushButtonReadContinuousPress+0x68>
+ 800400e:	687b      	ldr	r3, [r7, #4]
+ 8004010:	8a1b      	ldrh	r3, [r3, #16]
+ 8004012:	2b09      	cmp	r3, #9
+ 8004014:	d906      	bls.n	8004024 <pushButtonReadContinuousPress+0x68>
 	{
 		pushButton->timeContinuousPressCounter += 2;
- 8004006:	687b      	ldr	r3, [r7, #4]
- 8004008:	895b      	ldrh	r3, [r3, #10]
- 800400a:	3302      	adds	r3, #2
- 800400c:	b29a      	uxth	r2, r3
- 800400e:	687b      	ldr	r3, [r7, #4]
- 8004010:	815a      	strh	r2, [r3, #10]
- 8004012:	e005      	b.n	8004020 <pushButtonReadContinuousPress+0x74>
+ 8004016:	687b      	ldr	r3, [r7, #4]
+ 8004018:	895b      	ldrh	r3, [r3, #10]
+ 800401a:	3302      	adds	r3, #2
+ 800401c:	b29a      	uxth	r2, r3
+ 800401e:	687b      	ldr	r3, [r7, #4]
+ 8004020:	815a      	strh	r2, [r3, #10]
+ 8004022:	e005      	b.n	8004030 <pushButtonReadContinuousPress+0x74>
 	}
 	else
 	{
 		pushButton->timeContinuousPressCounter += 1;
- 8004014:	687b      	ldr	r3, [r7, #4]
- 8004016:	895b      	ldrh	r3, [r3, #10]
- 8004018:	3301      	adds	r3, #1
- 800401a:	b29a      	uxth	r2, r3
- 800401c:	687b      	ldr	r3, [r7, #4]
- 800401e:	815a      	strh	r2, [r3, #10]
+ 8004024:	687b      	ldr	r3, [r7, #4]
+ 8004026:	895b      	ldrh	r3, [r3, #10]
+ 8004028:	3301      	adds	r3, #1
+ 800402a:	b29a      	uxth	r2, r3
+ 800402c:	687b      	ldr	r3, [r7, #4]
+ 800402e:	815a      	strh	r2, [r3, #10]
 
 	if(pushButton->timeContinuousPressCounter < MIN_PRESSED_COUNTER)
 	{
 		pushButton->timeContinuousPressCounter = MIN_PRESSED_COUNTER;
 	}
 	else if(pushButton->timeContinuousPressCounter > MAX_PRESSED_COUNTER)
- 8004020:	687b      	ldr	r3, [r7, #4]
- 8004022:	895b      	ldrh	r3, [r3, #10]
- 8004024:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8004028:	4293      	cmp	r3, r2
- 800402a:	d903      	bls.n	8004034 <pushButtonReadContinuousPress+0x88>
+ 8004030:	687b      	ldr	r3, [r7, #4]
+ 8004032:	895b      	ldrh	r3, [r3, #10]
+ 8004034:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8004038:	4293      	cmp	r3, r2
+ 800403a:	d903      	bls.n	8004044 <pushButtonReadContinuousPress+0x88>
 	{
 		pushButton->timeContinuousPressCounter = MAX_PRESSED_COUNTER;
- 800402c:	687b      	ldr	r3, [r7, #4]
- 800402e:	f64f 52e8 	movw	r2, #65000	; 0xfde8
- 8004032:	815a      	strh	r2, [r3, #10]
+ 800403c:	687b      	ldr	r3, [r7, #4]
+ 800403e:	f64f 52e8 	movw	r2, #65000	; 0xfde8
+ 8004042:	815a      	strh	r2, [r3, #10]
 	}
 
 	if(pushButton->timeContinuousPressCounter >= pushButton->debounceTimeContinuousPressCounter)
- 8004034:	687b      	ldr	r3, [r7, #4]
- 8004036:	895a      	ldrh	r2, [r3, #10]
- 8004038:	687b      	ldr	r3, [r7, #4]
- 800403a:	89db      	ldrh	r3, [r3, #14]
- 800403c:	429a      	cmp	r2, r3
- 800403e:	d311      	bcc.n	8004064 <pushButtonReadContinuousPress+0xb8>
+ 8004044:	687b      	ldr	r3, [r7, #4]
+ 8004046:	895a      	ldrh	r2, [r3, #10]
+ 8004048:	687b      	ldr	r3, [r7, #4]
+ 800404a:	89db      	ldrh	r3, [r3, #14]
+ 800404c:	429a      	cmp	r2, r3
+ 800404e:	d311      	bcc.n	8004074 <pushButtonReadContinuousPress+0xb8>
 	{
 		if(pushButton->continuousPressedCounter < 20)
- 8004040:	687b      	ldr	r3, [r7, #4]
- 8004042:	8a1b      	ldrh	r3, [r3, #16]
- 8004044:	2b13      	cmp	r3, #19
- 8004046:	d805      	bhi.n	8004054 <pushButtonReadContinuousPress+0xa8>
+ 8004050:	687b      	ldr	r3, [r7, #4]
+ 8004052:	8a1b      	ldrh	r3, [r3, #16]
+ 8004054:	2b13      	cmp	r3, #19
+ 8004056:	d805      	bhi.n	8004064 <pushButtonReadContinuousPress+0xa8>
 		{
 			pushButton->continuousPressedCounter++;
- 8004048:	687b      	ldr	r3, [r7, #4]
- 800404a:	8a1b      	ldrh	r3, [r3, #16]
- 800404c:	3301      	adds	r3, #1
- 800404e:	b29a      	uxth	r2, r3
- 8004050:	687b      	ldr	r3, [r7, #4]
- 8004052:	821a      	strh	r2, [r3, #16]
+ 8004058:	687b      	ldr	r3, [r7, #4]
+ 800405a:	8a1b      	ldrh	r3, [r3, #16]
+ 800405c:	3301      	adds	r3, #1
+ 800405e:	b29a      	uxth	r2, r3
+ 8004060:	687b      	ldr	r3, [r7, #4]
+ 8004062:	821a      	strh	r2, [r3, #16]
 		}
 
 		pushButton->timeContinuousPressCounter = MIN_PRESSED_COUNTER;
- 8004054:	687b      	ldr	r3, [r7, #4]
- 8004056:	2200      	movs	r2, #0
- 8004058:	815a      	strh	r2, [r3, #10]
+ 8004064:	687b      	ldr	r3, [r7, #4]
+ 8004066:	2200      	movs	r2, #0
+ 8004068:	815a      	strh	r2, [r3, #10]
 		pushButton->pressState = PRESSED;
- 800405a:	687b      	ldr	r3, [r7, #4]
- 800405c:	2201      	movs	r2, #1
- 800405e:	71da      	strb	r2, [r3, #7]
+ 800406a:	687b      	ldr	r3, [r7, #4]
+ 800406c:	2201      	movs	r2, #1
+ 800406e:	71da      	strb	r2, [r3, #7]
 		return PRESSED;
- 8004060:	2301      	movs	r3, #1
- 8004062:	e003      	b.n	800406c <pushButtonReadContinuousPress+0xc0>
+ 8004070:	2301      	movs	r3, #1
+ 8004072:	e003      	b.n	800407c <pushButtonReadContinuousPress+0xc0>
 	}
 
 	pushButton->pressState = UNPRESSED;
- 8004064:	687b      	ldr	r3, [r7, #4]
- 8004066:	2200      	movs	r2, #0
- 8004068:	71da      	strb	r2, [r3, #7]
+ 8004074:	687b      	ldr	r3, [r7, #4]
+ 8004076:	2200      	movs	r2, #0
+ 8004078:	71da      	strb	r2, [r3, #7]
 	return UNPRESSED;
- 800406a:	2300      	movs	r3, #0
+ 800407a:	2300      	movs	r3, #0
 }
- 800406c:	4618      	mov	r0, r3
- 800406e:	3710      	adds	r7, #16
- 8004070:	46bd      	mov	sp, r7
- 8004072:	bd80      	pop	{r7, pc}
+ 800407c:	4618      	mov	r0, r3
+ 800407e:	3710      	adds	r7, #16
+ 8004080:	46bd      	mov	sp, r7
+ 8004082:	bd80      	pop	{r7, pc}
 
-08004074 <pushButtonReadSingleAndContinuousPress>:
+08004084 <pushButtonReadSingleAndContinuousPress>:
 
 PressState pushButtonReadSingleAndContinuousPress(PushButton *pushButton)
 {
- 8004074:	b580      	push	{r7, lr}
- 8004076:	b084      	sub	sp, #16
- 8004078:	af00      	add	r7, sp, #0
- 800407a:	6078      	str	r0, [r7, #4]
+ 8004084:	b580      	push	{r7, lr}
+ 8004086:	b084      	sub	sp, #16
+ 8004088:	af00      	add	r7, sp, #0
+ 800408a:	6078      	str	r0, [r7, #4]
 	PressState pushButtonSinglePressStateInRelease = pushButtonReadSinglePressInRelease(pushButton);
- 800407c:	6878      	ldr	r0, [r7, #4]
- 800407e:	f7ff ff54 	bl	8003f2a <pushButtonReadSinglePressInRelease>
- 8004082:	4603      	mov	r3, r0
- 8004084:	73fb      	strb	r3, [r7, #15]
+ 800408c:	6878      	ldr	r0, [r7, #4]
+ 800408e:	f7ff ff54 	bl	8003f3a <pushButtonReadSinglePressInRelease>
+ 8004092:	4603      	mov	r3, r0
+ 8004094:	73fb      	strb	r3, [r7, #15]
 	PressState pushButtonContinuousPressState = pushButtonReadContinuousPress(pushButton);
- 8004086:	6878      	ldr	r0, [r7, #4]
- 8004088:	f7ff ff90 	bl	8003fac <pushButtonReadContinuousPress>
- 800408c:	4603      	mov	r3, r0
- 800408e:	73bb      	strb	r3, [r7, #14]
+ 8004096:	6878      	ldr	r0, [r7, #4]
+ 8004098:	f7ff ff90 	bl	8003fbc <pushButtonReadContinuousPress>
+ 800409c:	4603      	mov	r3, r0
+ 800409e:	73bb      	strb	r3, [r7, #14]
 
 	return (pushButtonSinglePressStateInRelease || pushButtonContinuousPressState);
- 8004090:	7bfb      	ldrb	r3, [r7, #15]
- 8004092:	2b00      	cmp	r3, #0
- 8004094:	d102      	bne.n	800409c <pushButtonReadSingleAndContinuousPress+0x28>
- 8004096:	7bbb      	ldrb	r3, [r7, #14]
- 8004098:	2b00      	cmp	r3, #0
- 800409a:	d001      	beq.n	80040a0 <pushButtonReadSingleAndContinuousPress+0x2c>
- 800409c:	2301      	movs	r3, #1
- 800409e:	e000      	b.n	80040a2 <pushButtonReadSingleAndContinuousPress+0x2e>
- 80040a0:	2300      	movs	r3, #0
- 80040a2:	b2db      	uxtb	r3, r3
+ 80040a0:	7bfb      	ldrb	r3, [r7, #15]
+ 80040a2:	2b00      	cmp	r3, #0
+ 80040a4:	d102      	bne.n	80040ac <pushButtonReadSingleAndContinuousPress+0x28>
+ 80040a6:	7bbb      	ldrb	r3, [r7, #14]
+ 80040a8:	2b00      	cmp	r3, #0
+ 80040aa:	d001      	beq.n	80040b0 <pushButtonReadSingleAndContinuousPress+0x2c>
+ 80040ac:	2301      	movs	r3, #1
+ 80040ae:	e000      	b.n	80040b2 <pushButtonReadSingleAndContinuousPress+0x2e>
+ 80040b0:	2300      	movs	r3, #0
+ 80040b2:	b2db      	uxtb	r3, r3
 }
- 80040a4:	4618      	mov	r0, r3
- 80040a6:	3710      	adds	r7, #16
- 80040a8:	46bd      	mov	sp, r7
- 80040aa:	bd80      	pop	{r7, pc}
+ 80040b4:	4618      	mov	r0, r3
+ 80040b6:	3710      	adds	r7, #16
+ 80040b8:	46bd      	mov	sp, r7
+ 80040ba:	bd80      	pop	{r7, pc}
 
-080040ac <__libc_init_array>:
- 80040ac:	b570      	push	{r4, r5, r6, lr}
- 80040ae:	4d0d      	ldr	r5, [pc, #52]	; (80040e4 <__libc_init_array+0x38>)
- 80040b0:	4c0d      	ldr	r4, [pc, #52]	; (80040e8 <__libc_init_array+0x3c>)
- 80040b2:	1b64      	subs	r4, r4, r5
- 80040b4:	10a4      	asrs	r4, r4, #2
- 80040b6:	2600      	movs	r6, #0
- 80040b8:	42a6      	cmp	r6, r4
- 80040ba:	d109      	bne.n	80040d0 <__libc_init_array+0x24>
- 80040bc:	4d0b      	ldr	r5, [pc, #44]	; (80040ec <__libc_init_array+0x40>)
- 80040be:	4c0c      	ldr	r4, [pc, #48]	; (80040f0 <__libc_init_array+0x44>)
- 80040c0:	f000 f834 	bl	800412c <_init>
- 80040c4:	1b64      	subs	r4, r4, r5
- 80040c6:	10a4      	asrs	r4, r4, #2
- 80040c8:	2600      	movs	r6, #0
- 80040ca:	42a6      	cmp	r6, r4
- 80040cc:	d105      	bne.n	80040da <__libc_init_array+0x2e>
- 80040ce:	bd70      	pop	{r4, r5, r6, pc}
- 80040d0:	f855 3b04 	ldr.w	r3, [r5], #4
- 80040d4:	4798      	blx	r3
- 80040d6:	3601      	adds	r6, #1
- 80040d8:	e7ee      	b.n	80040b8 <__libc_init_array+0xc>
- 80040da:	f855 3b04 	ldr.w	r3, [r5], #4
- 80040de:	4798      	blx	r3
- 80040e0:	3601      	adds	r6, #1
- 80040e2:	e7f2      	b.n	80040ca <__libc_init_array+0x1e>
- 80040e4:	08004184 	.word	0x08004184
- 80040e8:	08004184 	.word	0x08004184
- 80040ec:	08004184 	.word	0x08004184
- 80040f0:	08004188 	.word	0x08004188
+080040bc <__libc_init_array>:
+ 80040bc:	b570      	push	{r4, r5, r6, lr}
+ 80040be:	4d0d      	ldr	r5, [pc, #52]	; (80040f4 <__libc_init_array+0x38>)
+ 80040c0:	4c0d      	ldr	r4, [pc, #52]	; (80040f8 <__libc_init_array+0x3c>)
+ 80040c2:	1b64      	subs	r4, r4, r5
+ 80040c4:	10a4      	asrs	r4, r4, #2
+ 80040c6:	2600      	movs	r6, #0
+ 80040c8:	42a6      	cmp	r6, r4
+ 80040ca:	d109      	bne.n	80040e0 <__libc_init_array+0x24>
+ 80040cc:	4d0b      	ldr	r5, [pc, #44]	; (80040fc <__libc_init_array+0x40>)
+ 80040ce:	4c0c      	ldr	r4, [pc, #48]	; (8004100 <__libc_init_array+0x44>)
+ 80040d0:	f000 f834 	bl	800413c <_init>
+ 80040d4:	1b64      	subs	r4, r4, r5
+ 80040d6:	10a4      	asrs	r4, r4, #2
+ 80040d8:	2600      	movs	r6, #0
+ 80040da:	42a6      	cmp	r6, r4
+ 80040dc:	d105      	bne.n	80040ea <__libc_init_array+0x2e>
+ 80040de:	bd70      	pop	{r4, r5, r6, pc}
+ 80040e0:	f855 3b04 	ldr.w	r3, [r5], #4
+ 80040e4:	4798      	blx	r3
+ 80040e6:	3601      	adds	r6, #1
+ 80040e8:	e7ee      	b.n	80040c8 <__libc_init_array+0xc>
+ 80040ea:	f855 3b04 	ldr.w	r3, [r5], #4
+ 80040ee:	4798      	blx	r3
+ 80040f0:	3601      	adds	r6, #1
+ 80040f2:	e7f2      	b.n	80040da <__libc_init_array+0x1e>
+ 80040f4:	08004194 	.word	0x08004194
+ 80040f8:	08004194 	.word	0x08004194
+ 80040fc:	08004194 	.word	0x08004194
+ 8004100:	08004198 	.word	0x08004198
 
-080040f4 <memset>:
- 80040f4:	4402      	add	r2, r0
- 80040f6:	4603      	mov	r3, r0
- 80040f8:	4293      	cmp	r3, r2
- 80040fa:	d100      	bne.n	80040fe <memset+0xa>
- 80040fc:	4770      	bx	lr
- 80040fe:	f803 1b01 	strb.w	r1, [r3], #1
- 8004102:	e7f9      	b.n	80040f8 <memset+0x4>
+08004104 <memset>:
+ 8004104:	4402      	add	r2, r0
+ 8004106:	4603      	mov	r3, r0
+ 8004108:	4293      	cmp	r3, r2
+ 800410a:	d100      	bne.n	800410e <memset+0xa>
+ 800410c:	4770      	bx	lr
+ 800410e:	f803 1b01 	strb.w	r1, [r3], #1
+ 8004112:	e7f9      	b.n	8004108 <memset+0x4>
 
-08004104 <strncpy>:
- 8004104:	b510      	push	{r4, lr}
- 8004106:	3901      	subs	r1, #1
- 8004108:	4603      	mov	r3, r0
- 800410a:	b132      	cbz	r2, 800411a <strncpy+0x16>
- 800410c:	f811 4f01 	ldrb.w	r4, [r1, #1]!
- 8004110:	f803 4b01 	strb.w	r4, [r3], #1
- 8004114:	3a01      	subs	r2, #1
- 8004116:	2c00      	cmp	r4, #0
- 8004118:	d1f7      	bne.n	800410a <strncpy+0x6>
- 800411a:	441a      	add	r2, r3
- 800411c:	2100      	movs	r1, #0
- 800411e:	4293      	cmp	r3, r2
- 8004120:	d100      	bne.n	8004124 <strncpy+0x20>
- 8004122:	bd10      	pop	{r4, pc}
- 8004124:	f803 1b01 	strb.w	r1, [r3], #1
- 8004128:	e7f9      	b.n	800411e <strncpy+0x1a>
+08004114 <strncpy>:
+ 8004114:	b510      	push	{r4, lr}
+ 8004116:	3901      	subs	r1, #1
+ 8004118:	4603      	mov	r3, r0
+ 800411a:	b132      	cbz	r2, 800412a <strncpy+0x16>
+ 800411c:	f811 4f01 	ldrb.w	r4, [r1, #1]!
+ 8004120:	f803 4b01 	strb.w	r4, [r3], #1
+ 8004124:	3a01      	subs	r2, #1
+ 8004126:	2c00      	cmp	r4, #0
+ 8004128:	d1f7      	bne.n	800411a <strncpy+0x6>
+ 800412a:	441a      	add	r2, r3
+ 800412c:	2100      	movs	r1, #0
+ 800412e:	4293      	cmp	r3, r2
+ 8004130:	d100      	bne.n	8004134 <strncpy+0x20>
+ 8004132:	bd10      	pop	{r4, pc}
+ 8004134:	f803 1b01 	strb.w	r1, [r3], #1
+ 8004138:	e7f9      	b.n	800412e <strncpy+0x1a>
 	...
 
-0800412c <_init>:
- 800412c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800412e:	bf00      	nop
- 8004130:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8004132:	bc08      	pop	{r3}
- 8004134:	469e      	mov	lr, r3
- 8004136:	4770      	bx	lr
+0800413c <_init>:
+ 800413c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800413e:	bf00      	nop
+ 8004140:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8004142:	bc08      	pop	{r3}
+ 8004144:	469e      	mov	lr, r3
+ 8004146:	4770      	bx	lr
 
-08004138 <_fini>:
- 8004138:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800413a:	bf00      	nop
- 800413c:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800413e:	bc08      	pop	{r3}
- 8004140:	469e      	mov	lr, r3
- 8004142:	4770      	bx	lr
+08004148 <_fini>:
+ 8004148:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800414a:	bf00      	nop
+ 800414c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800414e:	bc08      	pop	{r3}
+ 8004150:	469e      	mov	lr, r3
+ 8004152:	4770      	bx	lr

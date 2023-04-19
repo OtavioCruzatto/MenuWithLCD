@@ -381,8 +381,10 @@ void lcdControllerInit(LcdController *lcdController)
 			lcdController->countDelay = TRUE;
 			if(lcdController->delayCounter >= DELAY_3000_MICRO_SECONDS)
 			{
+				lcdController->countDelay = FALSE;
+				lcdController->delayCounter = 0;
 				lcdController->counterInitCycles1++;
-				if(lcdController->counterInitCycles1 > 2*(QTY_OF_ROWS * QTY_OF_CHARS_PER_ROW))
+				if(lcdController->counterInitCycles1 > 2)
 				{
 					lcdController->command = COMMAND_12;
 					lcdController->currentRow = 0;

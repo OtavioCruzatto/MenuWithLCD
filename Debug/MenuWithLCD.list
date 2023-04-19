@@ -445,40 +445,40 @@ int main(void)
  8000572:	f000 fa23 	bl	80009bc <MX_TIM9_Init>
   /* USER CODE BEGIN 2 */
 
-  pushButtonInit(&upPushButton, BTN_UP_GPIO_Port, BTN_UP_Pin, NORMALLY_LOW, 400, 3000);
- 8000576:	f640 33b8 	movw	r3, #3000	; 0xbb8
+  pushButtonInit(&upPushButton, BTN_UP_GPIO_Port, BTN_UP_Pin, NORMALLY_LOW, 3500, 30000);
+ 8000576:	f247 5330 	movw	r3, #30000	; 0x7530
  800057a:	9301      	str	r3, [sp, #4]
- 800057c:	f44f 73c8 	mov.w	r3, #400	; 0x190
+ 800057c:	f640 53ac 	movw	r3, #3500	; 0xdac
  8000580:	9300      	str	r3, [sp, #0]
  8000582:	2300      	movs	r3, #0
  8000584:	f44f 7280 	mov.w	r2, #256	; 0x100
  8000588:	4995      	ldr	r1, [pc, #596]	; (80007e0 <main+0x284>)
  800058a:	4896      	ldr	r0, [pc, #600]	; (80007e4 <main+0x288>)
  800058c:	f003 fc95 	bl	8003eba <pushButtonInit>
-  pushButtonInit(&downPushButton, BTN_DOWN_GPIO_Port, BTN_DOWN_Pin, NORMALLY_LOW, 400, 3000);
- 8000590:	f640 33b8 	movw	r3, #3000	; 0xbb8
+  pushButtonInit(&downPushButton, BTN_DOWN_GPIO_Port, BTN_DOWN_Pin, NORMALLY_LOW, 3500, 30000);
+ 8000590:	f247 5330 	movw	r3, #30000	; 0x7530
  8000594:	9301      	str	r3, [sp, #4]
- 8000596:	f44f 73c8 	mov.w	r3, #400	; 0x190
+ 8000596:	f640 53ac 	movw	r3, #3500	; 0xdac
  800059a:	9300      	str	r3, [sp, #0]
  800059c:	2300      	movs	r3, #0
  800059e:	f44f 7200 	mov.w	r2, #512	; 0x200
  80005a2:	498f      	ldr	r1, [pc, #572]	; (80007e0 <main+0x284>)
  80005a4:	4890      	ldr	r0, [pc, #576]	; (80007e8 <main+0x28c>)
  80005a6:	f003 fc88 	bl	8003eba <pushButtonInit>
-  pushButtonInit(&enterPushButton, BTN_ENTER_GPIO_Port, BTN_ENTER_Pin, NORMALLY_LOW, 3000, 15000);
- 80005aa:	f643 2398 	movw	r3, #15000	; 0x3a98
+  pushButtonInit(&enterPushButton, BTN_ENTER_GPIO_Port, BTN_ENTER_Pin, NORMALLY_LOW, 3500, 30000);
+ 80005aa:	f247 5330 	movw	r3, #30000	; 0x7530
  80005ae:	9301      	str	r3, [sp, #4]
- 80005b0:	f640 33b8 	movw	r3, #3000	; 0xbb8
+ 80005b0:	f640 53ac 	movw	r3, #3500	; 0xdac
  80005b4:	9300      	str	r3, [sp, #0]
  80005b6:	2300      	movs	r3, #0
  80005b8:	2240      	movs	r2, #64	; 0x40
  80005ba:	498c      	ldr	r1, [pc, #560]	; (80007ec <main+0x290>)
  80005bc:	488c      	ldr	r0, [pc, #560]	; (80007f0 <main+0x294>)
  80005be:	f003 fc7c 	bl	8003eba <pushButtonInit>
-  pushButtonInit(&escPushButton, BTN_ESC_GPIO_Port, BTN_ESC_Pin, NORMALLY_LOW, 3000, 15000);
- 80005c2:	f643 2398 	movw	r3, #15000	; 0x3a98
+  pushButtonInit(&escPushButton, BTN_ESC_GPIO_Port, BTN_ESC_Pin, NORMALLY_LOW, 3500, 30000);
+ 80005c2:	f247 5330 	movw	r3, #30000	; 0x7530
  80005c6:	9301      	str	r3, [sp, #4]
- 80005c8:	f640 33b8 	movw	r3, #3000	; 0xbb8
+ 80005c8:	f640 53ac 	movw	r3, #3500	; 0xdac
  80005cc:	9300      	str	r3, [sp, #0]
  80005ce:	2300      	movs	r3, #0
  80005d0:	2280      	movs	r2, #128	; 0x80

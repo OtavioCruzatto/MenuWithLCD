@@ -132,10 +132,10 @@ int main(void)
   MX_TIM9_Init();
   /* USER CODE BEGIN 2 */
 
-  pushButtonInit(&upPushButton, BTN_UP_GPIO_Port, BTN_UP_Pin, NORMALLY_LOW, 400, 3000);
-  pushButtonInit(&downPushButton, BTN_DOWN_GPIO_Port, BTN_DOWN_Pin, NORMALLY_LOW, 400, 3000);
-  pushButtonInit(&enterPushButton, BTN_ENTER_GPIO_Port, BTN_ENTER_Pin, NORMALLY_LOW, 3000, 15000);
-  pushButtonInit(&escPushButton, BTN_ESC_GPIO_Port, BTN_ESC_Pin, NORMALLY_LOW, 3000, 15000);
+  pushButtonInit(&upPushButton, BTN_UP_GPIO_Port, BTN_UP_Pin, NORMALLY_LOW, 3500, 30000);
+  pushButtonInit(&downPushButton, BTN_DOWN_GPIO_Port, BTN_DOWN_Pin, NORMALLY_LOW, 3500, 30000);
+  pushButtonInit(&enterPushButton, BTN_ENTER_GPIO_Port, BTN_ENTER_Pin, NORMALLY_LOW, 3500, 30000);
+  pushButtonInit(&escPushButton, BTN_ESC_GPIO_Port, BTN_ESC_Pin, NORMALLY_LOW, 3500, 30000);
 
   lcdControllerInitStruct(&lcd,
 		  LCD_RS_GPIO_Port, LCD_RS_Pin,
